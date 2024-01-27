@@ -1,15 +1,18 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import svgr from 'vite-plugin-svgr';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   build: {
-    target: "esnext",
+    target: 'esnext',
     chunkSizeWarningLimit: 1200,
-    sourcemap: "hidden",
+    sourcemap: 'hidden',
   },
-  plugins: [react()],
+  plugins: [react(), svgr()],
   resolve: {
-    alias: [{ find: "@", replacement: "/src" }],
+    alias: [{ find: '@', replacement: '/src' }],
+  },
+  server: {
+    port: 3000,
   },
 });
