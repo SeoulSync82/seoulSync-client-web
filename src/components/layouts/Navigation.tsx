@@ -23,6 +23,11 @@ const Navigation = () => {
       name: '내 코스',
       size: 24,
     },
+    {
+      key: 'AIRecommend',
+      name: 'AI 추천',
+      size: 66,
+    },
   ];
 
   const onClickMenu = (menu: string) => {
@@ -47,12 +52,25 @@ const Navigation = () => {
           key={item.key}
           onClick={() => onClickMenu(item.key)}
         >
-          <div className="mb-1.5 w-fit">
-            <SVGIcon name={item.key} size={item.size} active={activeMenu === item.key} />
-          </div>
-          <div className="mt-1.5 w-fit text-12 font-bold text-[#757575] group-[&.active]:text-blue-400">
-            <p>{item.name}</p>
-          </div>
+          {item.key === 'AIRecommend' ? (
+            <>
+              <div className="w-fit">
+                <SVGIcon name={item.key} size={item.size} active={activeMenu === item.key} />
+              </div>
+              <div className="mb-8 w-fit text-12 font-bold text-[#9070CF]">
+                <p>{item.name}</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="mb-1.5 w-fit">
+                <SVGIcon name={item.key} size={item.size} active={activeMenu === item.key} />
+              </div>
+              <div className="mt-1.5 w-fit text-12 font-bold text-[#757575] group-[&.active]:text-blue-400">
+                <p>{item.name}</p>
+              </div>
+            </>
+          )}
         </li>,
       );
     });
