@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import SVGIcon, { IconType } from '../atoms/SVGIcon';
+import { useNavigate } from 'react-router-dom';
 
 type menuType = {
   key: IconType;
@@ -9,6 +10,7 @@ type menuType = {
 
 const Navigation = () => {
   const [activeMenu, setActiveMenu] = useState('home');
+  const navigate = useNavigate();
 
   const menuList: Array<menuType> = [
     {
@@ -25,10 +27,19 @@ const Navigation = () => {
 
   const onClickMenu = (menu: string) => {
     setActiveMenu(menu);
+    switch (menu) {
+      case 'home':
+        navigate('/', { replace: true });
+        break;
+      case 'myCourse':
+        navigate('/my-course', { replace: true });
+        break;
+    }
   };
 
   const makeNavigation = (): JSX.Element[] => {
     const result: JSX.Element[] = [];
+
     menuList.forEach((item) => {
       result.push(
         <li
@@ -39,7 +50,7 @@ const Navigation = () => {
           <div className="mb-1.5 w-fit">
             <SVGIcon name={item.key} size={item.size} active={activeMenu === item.key} />
           </div>
-          <div className="text-12 mt-1.5 w-fit font-bold text-[#757575] group-[&.active]:text-blue-400">
+          <div className="mt-1.5 w-fit text-12 font-bold text-[#757575] group-[&.active]:text-blue-400">
             <p>{item.name}</p>
           </div>
         </li>,

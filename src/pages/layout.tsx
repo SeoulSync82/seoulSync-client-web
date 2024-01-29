@@ -1,3 +1,4 @@
+import Navigation from '@/components/layouts/Navigation';
 import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
@@ -6,6 +7,7 @@ const Layout = () => {
       <main className="flex min-h-screen flex-col">
         <Outlet />
       </main>
+      <Navigation />
     </>
   );
 };
