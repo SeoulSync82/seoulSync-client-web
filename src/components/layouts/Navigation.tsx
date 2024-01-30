@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SVGIcon, { IconType } from '../atoms/SVGIcon';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type menuType = {
   key: IconType;
@@ -8,7 +9,9 @@ type menuType = {
 };
 
 const Navigation = () => {
-  const [activeMenu, setActiveMenu] = useState('home');
+  const [activeMenu, setActiveMenu] = useState('');
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const menuList: Array<menuType> = [
     {
@@ -21,14 +24,50 @@ const Navigation = () => {
       name: '내 코스',
       size: 24,
     },
+    {
+      key: 'AIRecommend',
+      name: 'AI 추천',
+      size: 66,
+    },
+    {
+      key: 'community',
+      name: '커뮤니티',
+      size: 24,
+    },
+    {
+      key: 'profile',
+      name: '마이페이지',
+      size: 24,
+    },
   ];
 
   const onClickMenu = (menu: string) => {
-    setActiveMenu(menu);
+    switch (menu) {
+      case 'home':
+        navigate('/', { replace: true });
+        break;
+      case 'myCourse':
+        navigate('/myCourse', { replace: true });
+        break;
+      case 'AIRecommend':
+        navigate('/AIRecommend', { replace: true });
+        break;
+      case 'community':
+        navigate('/community', { replace: true });
+        break;
+      case 'profile':
+        navigate('/profile', { replace: true });
+        break;
+    }
   };
+
+  useEffect(() => {
+    setActiveMenu(pathname.replace('/', '') === '' ? 'home' : pathname.replace('/', ''));
+  }, []);
 
   const makeNavigation = (): JSX.Element[] => {
     const result: JSX.Element[] = [];
+
     menuList.forEach((item) => {
       result.push(
         <li
@@ -36,12 +75,25 @@ const Navigation = () => {
           key={item.key}
           onClick={() => onClickMenu(item.key)}
         >
-          <div className="mb-1.5 w-fit">
-            <SVGIcon name={item.key} size={item.size} active={activeMenu === item.key} />
-          </div>
-          <div className="text-12 mt-1.5 w-fit font-bold text-[#757575] group-[&.active]:text-blue-400">
-            <p>{item.name}</p>
-          </div>
+          {item.key === 'AIRecommend' ? (
+            <>
+              <div className="w-fit">
+                <SVGIcon name={item.key} size={item.size} active={activeMenu === item.key} />
+              </div>
+              <div className="mb-8 w-fit text-12 font-bold text-[#9070CF]">
+                <p>{item.name}</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="mb-1.5 w-fit">
+                <SVGIcon name={item.key} size={item.size} active={activeMenu === item.key} />
+              </div>
+              <div className="mt-1.5 w-fit text-12 font-bold text-[#757575] group-[&.active]:text-[#353D4A]">
+                <p>{item.name}</p>
+              </div>
+            </>
+          )}
         </li>,
       );
     });
