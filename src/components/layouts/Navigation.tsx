@@ -44,19 +44,19 @@ const Navigation = () => {
   const onClickMenu = (menu: string) => {
     switch (menu) {
       case 'home':
-        navigate('/', { replace: true });
+        navigate('/');
         break;
       case 'myCourse':
-        navigate('/myCourse', { replace: true });
+        navigate('/myCourse');
         break;
       case 'AIRecommend':
-        navigate('/AIRecommend', { replace: true });
+        navigate('/AIRecommend');
         break;
       case 'community':
-        navigate('/community', { replace: true });
+        navigate('/community');
         break;
       case 'profile':
-        navigate('/profile', { replace: true });
+        navigate('/profile');
         break;
     }
   };
@@ -85,14 +85,14 @@ const Navigation = () => {
               </div>
             </>
           ) : (
-            <>
+            <div className="flex min-w-14 max-w-14 flex-col items-center justify-center">
               <div className="mb-1.5 w-fit">
                 <SVGIcon name={item.key} size={item.size} active={activeMenu === item.key} />
               </div>
               <div className="mt-1.5 w-fit text-12 font-bold text-[#757575] group-[&.active]:text-[#353D4A]">
                 <p>{item.name}</p>
               </div>
-            </>
+            </div>
           )}
         </li>,
       );
