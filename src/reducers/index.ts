@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import testReducer, { TestState } from '@/reducers/testReducer';
+import modalReducer, { ModalState } from '@/reducers/modalReducer';
 const rootReducer = combineReducers({
-  testReducer,
+  modalReducer,
 });
 
 export type RootState = {
-  testReducer: TestState | undefined; // Allow for undefined
+  modalReducer: ModalState | undefined;
 };
 export default rootReducer;

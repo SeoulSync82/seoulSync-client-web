@@ -1,7 +1,23 @@
 import SVGIcon from '@/components/atoms/SVGIcon';
 import Header from '@/components/layouts/Header';
+import { setAlertModal } from '@/reducers/modalReducer';
+import { useDispatch } from 'react-redux';
 
 const Login = () => {
+  const dispatch = useDispatch();
+
+  const onClickKaKao = () => {
+    dispatch(
+      setAlertModal({
+        opened: true,
+        data: {
+          title: '앗 ..로그인에 실패했어요',
+          message: '같은 문제가 반복된다면 앱을 꼈다 켜거나 삭제하고 다시 설치해주세요.',
+        },
+      }),
+    );
+  };
+
   return (
     <>
       <Header />
@@ -21,19 +37,22 @@ const Login = () => {
                 active={false}
               />
             </div>
-            <div className="mb-3 flex h-[52px] w-[335px] items-center justify-center rounded-lg bg-[#F5DA35] text-15 font-semibold text-[#101010]">
+            <div
+              className="mb-3 flex h-[52px] w-[335px] cursor-pointer items-center justify-center rounded-lg bg-[#F5DA35] text-15 font-semibold text-[#101010]"
+              onClick={() => onClickKaKao()}
+            >
               <SVGIcon name="kakaoIcon" wSize={22} hSize={22} active={false} />
               <p className="ml-2">카카오톡으로 계속하기</p>
             </div>
-            <div className="mb-3 flex h-[52px] w-[335px] items-center justify-center rounded-lg bg-[#4DA524] text-15 font-semibold text-white">
+            <div className="mb-3 flex h-[52px] w-[335px] cursor-pointer items-center justify-center rounded-lg bg-[#4DA524] text-15 font-semibold text-white">
               <SVGIcon name="naverIcon" wSize={22} hSize={22} active={false} />
               <p className="ml-2">네이버로 계속하기</p>
             </div>
-            <div className="mb-[70px] flex h-[52px] w-[335px] items-center justify-center rounded-lg bg-[#F3F3F3] text-15 font-semibold text-[#101010]">
+            <div className="mb-[70px] flex h-[52px] w-[335px] cursor-pointer items-center justify-center rounded-lg bg-[#F3F3F3] text-15 font-semibold text-[#101010]">
               <SVGIcon name="googleIcon" wSize={22} hSize={22} active={false} />
               <p className="ml-2">구글로 계속하기</p>
             </div>
-            <p className="text-14 font-semibold text-[#858B93] underline underline-offset-4">
+            <p className="cursor-pointer text-14 font-semibold text-[#858B93] underline underline-offset-4">
               건너뛰기
             </p>
           </div>

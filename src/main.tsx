@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { Reducer, compose, createStore } from 'redux';
 import rootReducer, { RootState } from '@/reducers/index.ts';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { AlertType } from '@/reducers/modalReducer.ts';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 declare global {
@@ -16,7 +17,7 @@ declare global {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
-  rootReducer as Reducer<RootState, { type: string; payload: string }>,
+  rootReducer as Reducer<RootState, { type: string; payload: AlertType }>,
   composeEnhancers(),
 );
 
