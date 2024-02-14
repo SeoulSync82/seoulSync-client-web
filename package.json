@@ -4,14 +4,18 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "staging": "vite --mode staging",
+    "prod": "vite --mode production",
+    "build:staging": "tsc && vite build --mode staging",
+    "build:prod": "tsc && vite build --mode production",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview --port 3000",
     "format": "prettier . --write"
   },
   "dependencies": {
     "@svgr/plugin-svgo": "^8.1.0",
+    "axios": "^1.6.7",
+    "query-string": "^8.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
@@ -22,6 +26,7 @@
     "scss": "^0.2.4"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.19.0",

@@ -1,6 +1,5 @@
 import { RootState } from '@/reducers';
 import { setAlertModal } from '@/reducers/modalReducer';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const AlertModal = () => {
@@ -59,10 +58,6 @@ const AlertModal = () => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log(alterReducer);
-  // }, [alterReducer?.opened]);
-
   const makeAlertModal = () => {
     if (isAlterOpen) {
       return (
@@ -74,7 +69,10 @@ const AlertModal = () => {
             <div className="mb-4 mt-[34px] text-center">{makeTitle()}</div>
             <div className="text-center">{makeMessage()}</div>
             <hr className="mt-[34px] h-px w-full bg-[#EDEDED]" />
-            <div onClick={() => onClickSubmit()}>
+            <div
+              className="flex w-full items-center justify-center"
+              onClick={() => onClickSubmit()}
+            >
               <p className="my-5 cursor-pointer text-18 font-bold text-[#4A82EE]">확인</p>
             </div>
           </div>

@@ -1,7 +1,9 @@
 import SVGIcon from '@/components/atoms/SVGIcon';
 import Header from '@/components/layouts/Header';
+import config from '@/config';
 import { setAlertModal } from '@/reducers/modalReducer';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -44,10 +46,12 @@ const Login = () => {
               <SVGIcon name="kakaoIcon" wSize={22} hSize={22} active={false} />
               <p className="ml-2">카카오톡으로 계속하기</p>
             </div>
-            <div className="mb-3 flex h-[52px] w-[335px] cursor-pointer items-center justify-center rounded-lg bg-[#4DA524] text-15 font-semibold text-white">
-              <SVGIcon name="naverIcon" wSize={22} hSize={22} active={false} />
-              <p className="ml-2">네이버로 계속하기</p>
-            </div>
+            <Link to={`${config.api.default}/user/login/google`}>
+              <div className="mb-3 flex h-[52px] w-[335px] cursor-pointer items-center justify-center rounded-lg bg-[#4DA524] text-15 font-semibold text-white">
+                <SVGIcon name="naverIcon" wSize={22} hSize={22} active={false} />
+                <p className="ml-2">네이버로 계속하기</p>
+              </div>
+            </Link>
             <div className="mb-[70px] flex h-[52px] w-[335px] cursor-pointer items-center justify-center rounded-lg bg-[#F3F3F3] text-15 font-semibold text-[#101010]">
               <SVGIcon name="googleIcon" wSize={22} hSize={22} active={false} />
               <p className="ml-2">구글로 계속하기</p>
