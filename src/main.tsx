@@ -7,6 +7,7 @@ import { Reducer, compose, createStore } from 'redux';
 import rootReducer, { RootState } from '@/reducers/index.ts';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { AlertType } from '@/reducers/modalReducer.ts';
+import { CookiesProvider } from 'react-cookie';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 declare global {
@@ -25,10 +26,12 @@ const queryClient = new QueryClient();
 
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </QueryClientProvider>
+    <CookiesProvider>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </QueryClientProvider>
+    </CookiesProvider>
   </React.StrictMode>,
 );

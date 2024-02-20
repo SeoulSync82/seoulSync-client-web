@@ -2,11 +2,14 @@ import config from '@/config';
 import AxiosHelper from '@/utils/network/axiosHelper';
 export const userAPI = () => {
   const BASE_URL = config.api.default;
-  const _network = AxiosHelper().setBaseUrl(BASE_URL).build();
+  const _network = AxiosHelper()
+    .setAuthorization(localStorage.getItem('eid_access_token'))
+    .setBaseUrl(BASE_URL)
+    .build();
 
-  const getGoogleLogin = () => {
-    return _network.get('/user/login/google');
+  const getUserProfile = () => {
+    return _network.get('/user/profile');
   };
 
-  return { getGoogleLogin };
+  return { getUserProfile };
 };
