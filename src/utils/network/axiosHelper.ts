@@ -1,5 +1,6 @@
 import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
 import queryString from 'query-string';
+import { useNavigate } from 'react-router-dom';
 
 const AxiosHelper = () => {
   let _baseUrl = '';
@@ -50,7 +51,9 @@ const AxiosHelper = () => {
         _instance.defaults.headers.common['Authorization'] = `Bearer ${data.eid_access_token}`;
         return get(error.response.config.url ? error.response.config.url : '', params);
       } else {
+        const navigate = useNavigate();
         localStorage.removeItem('eid_access_token');
+        navigate('/login');
         return;
       }
     }
