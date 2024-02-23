@@ -33,15 +33,11 @@ const AxiosHelper = () => {
 
   const refreshToken = async () => {
     try {
-      const { data, status } = await _instance.post(_baseUrl + '/user/refresh');
-
-      if (status === 500) {
-        throw data;
-      }
+      const { data } = await _instance.post(_baseUrl + '/user/refresh');
 
       return data;
     } catch (e) {
-      console.log('Error occurred:', e);
+      console.log('리프레쉬 토큰 재발급 호출 실패', e);
       throw e;
     }
   };
@@ -77,11 +73,42 @@ const AxiosHelper = () => {
 
   const post = async (url: string, params?: unknown): Promise<AxiosResponse> => {
     try {
-      const { data, status } = await _instance.post(url, params);
+      const { data } = await _instance.post(url, params);
 
-      if (status === 500) {
-        throw data;
-      }
+      return data;
+    } catch (e) {
+      throw axiosError(e as AxiosError, params);
+    }
+  };
+
+  const put = async (url: string, params?: unknown): Promise<AxiosResponse> => {
+    try {
+      const { data } = await _instance.put(url, params);
+
+      return data;
+    } catch (e) {
+      throw axiosError(e as AxiosError, params);
+    }
+  };
+
+  const del = async (url: string, params?: unknown): Promise<AxiosResponse> => {
+    try {
+      const { data } = await _instance.delete(url, {
+        params,
+        paramsSerializer: (params) => {
+          return queryString.stringify(params);
+        },
+      });
+
+      return data;
+    } catch (e) {
+      throw axiosError(e as AxiosError, params);
+    }
+  };
+
+  const patch = async (url: string, params?: unknown): Promise<AxiosResponse> => {
+    try {
+      const { data } = await _instance.patch(url, params);
 
       return data;
     } catch (e) {
@@ -95,6 +122,9 @@ const AxiosHelper = () => {
     build,
     get,
     post,
+    put,
+    del,
+    patch,
   };
 
   return apiFunctions;

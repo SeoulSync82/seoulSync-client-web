@@ -46,16 +46,18 @@ const Login = () => {
               <SVGIcon name="kakaoIcon" wSize={22} hSize={22} active={false} />
               <p className="ml-2">카카오톡으로 계속하기</p>
             </div>
-            <Link to={`${config.api.default}/user/login/google`}>
+            <Link to={`${config.api.default}/user/login/naver`}>
               <div className="mb-3 flex h-[52px] w-[335px] cursor-pointer items-center justify-center rounded-lg bg-[#4DA524] text-15 font-semibold text-white">
                 <SVGIcon name="naverIcon" wSize={22} hSize={22} active={false} />
                 <p className="ml-2">네이버로 계속하기</p>
               </div>
             </Link>
-            <div className="mb-[70px] flex h-[52px] w-[335px] cursor-pointer items-center justify-center rounded-lg bg-[#F3F3F3] text-15 font-semibold text-[#101010]">
-              <SVGIcon name="googleIcon" wSize={22} hSize={22} active={false} />
-              <p className="ml-2">구글로 계속하기</p>
-            </div>
+            <Link to={`${config.api.default}/user/login/google`}>
+              <div className="mb-[70px] flex h-[52px] w-[335px] cursor-pointer items-center justify-center rounded-lg bg-[#F3F3F3] text-15 font-semibold text-[#101010]">
+                <SVGIcon name="googleIcon" wSize={22} hSize={22} active={false} />
+                <p className="ml-2">구글로 계속하기</p>
+              </div>
+            </Link>
             <p className="cursor-pointer text-14 font-semibold text-[#858B93] underline underline-offset-4">
               건너뛰기
             </p>
