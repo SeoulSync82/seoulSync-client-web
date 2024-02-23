@@ -2,7 +2,7 @@ import { userAPI } from '@/api/user';
 import Header from '@/components/layouts/Header';
 import Navigation from '@/components/layouts/Navigation';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -15,8 +15,12 @@ const Home = () => {
       localStorage.setItem('eid_access_token', token);
       navigate('/');
     }
-    const user = userAPI();
-    user.getUserProfile();
+
+    if (localStorage.getItem('eid_access_token') ? true : false) {
+      //임시 네트워크 테스트를 위한 호출
+      const user = userAPI();
+      user.getUserProfile();
+    }
   }, []);
 
   return (
