@@ -78,7 +78,12 @@ const Navigation = () => {
           {item.key === 'AIRecommend' ? (
             <>
               <div className="w-fit">
-                <SVGIcon name={item.key} size={item.size} active={activeMenu === item.key} />
+                <SVGIcon
+                  name={item.key}
+                  hSize={item.size}
+                  wSize={item.size}
+                  active={activeMenu === item.key}
+                />
               </div>
               <div className="mb-8 w-fit text-12 font-bold text-[#9070CF]">
                 <p>{item.name}</p>
@@ -87,7 +92,12 @@ const Navigation = () => {
           ) : (
             <div className="flex min-w-14 max-w-14 flex-col items-center justify-center">
               <div className="mb-1.5 w-fit">
-                <SVGIcon name={item.key} size={item.size} active={activeMenu === item.key} />
+                <SVGIcon
+                  name={item.key}
+                  hSize={item.size}
+                  wSize={item.size}
+                  active={activeMenu === item.key}
+                />
               </div>
               <div className="mt-1.5 w-fit text-12 font-bold text-[#757575] group-[&.active]:text-[#353D4A]">
                 <p>{item.name}</p>

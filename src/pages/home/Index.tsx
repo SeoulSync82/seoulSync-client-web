@@ -1,7 +1,24 @@
+import { userAPI } from '@/api/user';
 import Header from '@/components/layouts/Header';
 import Navigation from '@/components/layouts/Navigation';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const token = queryParams.get('token');
+
+    if (token) {
+      localStorage.setItem('eid_access_token', token);
+      navigate('/');
+    }
+    const user = userAPI();
+    user.getUserProfile();
+  }, []);
+
   return (
     <>
       <Header />

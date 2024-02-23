@@ -23,6 +23,9 @@ const Header = () => {
       case 'profile':
         setActivePageName('마이페이지');
         break;
+      case 'login':
+        setActivePageName('로그인');
+        break;
     }
   }, []);
 
@@ -36,15 +39,21 @@ const Header = () => {
         <>
           <SVGIcon style="w-[120px] h-[50px]" name="menuLogo" active={false} />
           <div className="flex max-w-[68px]">
-            <SVGIcon style="mr-2" size={30} name="alarmIcon" active={false} />
-            <SVGIcon name="searchIcon" size={30} active={false} />
+            <SVGIcon style="mr-2" hSize={30} wSize={30} name="alarmIcon" active={false} />
+            <SVGIcon name="searchIcon" hSize={30} wSize={30} active={false} />
           </div>
         </>
       );
     } else {
       return (
         <div className="relative flex size-full items-center">
-          <SVGIcon name="leftArrowIcon" size={30} active={false} click={onClickPrevBtn} />
+          <SVGIcon
+            name="leftArrowIcon"
+            hSize={30}
+            wSize={30}
+            active={false}
+            click={onClickPrevBtn}
+          />
           <p className="absolute left-1/2 top-1/2 max-h-[48px] max-w-[50%] -translate-x-1/2 -translate-y-1/2  text-16 font-bold text-[#101010]">
             {activePageName}
           </p>
