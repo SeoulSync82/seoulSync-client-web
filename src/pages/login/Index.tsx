@@ -1,24 +1,23 @@
 import SVGIcon from '@/components/atoms/SVGIcon';
 import Header from '@/components/layouts/Header';
 import config from '@/config';
-import { setAlertModal } from '@/reducers/modalReducer';
-import { useDispatch } from 'react-redux';
+// import { setAlertModal } from '@/reducers/modalReducer';
+// import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
-  const dispatch = useDispatch();
-
-  const onClickKaKao = () => {
-    dispatch(
-      setAlertModal({
-        opened: true,
-        data: {
-          title: '앗 ..로그인에 실패했어요',
-          message: '같은 문제가 반복된다면 앱을 꼈다 켜거나 삭제하고 다시 설치해주세요.',
-        },
-      }),
-    );
-  };
+  // const dispatch = useDispatch();
+  // const onClickKaKao = () => {
+  //   dispatch(
+  //     setAlertModal({
+  //       opened: true,
+  //       data: {
+  //         title: '앗 ..로그인에 실패했어요',
+  //         message: '같은 문제가 반복된다면 앱을 꼈다 켜거나 삭제하고 다시 설치해주세요.',
+  //       },
+  //     }),
+  //   );
+  // };
 
   return (
     <>
@@ -39,13 +38,12 @@ const Login = () => {
                 active={false}
               />
             </div>
-            <div
-              className="mb-3 flex h-[52px] w-[335px] cursor-pointer items-center justify-center rounded-lg bg-[#F5DA35] text-15 font-semibold text-[#101010]"
-              onClick={() => onClickKaKao()}
-            >
-              <SVGIcon name="kakaoIcon" wSize={22} hSize={22} active={false} />
-              <p className="ml-2">카카오톡으로 계속하기</p>
-            </div>
+            <Link to={`${config.api.default}/user/login/kakao`}>
+              <div className="mb-3 flex h-[52px] w-[335px] cursor-pointer items-center justify-center rounded-lg bg-[#F5DA35] text-15 font-semibold text-[#101010]">
+                <SVGIcon name="kakaoIcon" wSize={22} hSize={22} active={false} />
+                <p className="ml-2">카카오톡으로 계속하기</p>
+              </div>
+            </Link>
             <Link to={`${config.api.default}/user/login/naver`}>
               <div className="mb-3 flex h-[52px] w-[335px] cursor-pointer items-center justify-center rounded-lg bg-[#4DA524] text-15 font-semibold text-white">
                 <SVGIcon name="naverIcon" wSize={22} hSize={22} active={false} />
