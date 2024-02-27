@@ -1,4 +1,5 @@
 import { userAPI } from '@/api/user';
+import Loader from '@/components/atoms/Loader';
 import Header from '@/components/layouts/Header';
 import Navigation from '@/components/layouts/Navigation';
 import { useEffect } from 'react';
@@ -26,7 +27,8 @@ const Home = () => {
   return (
     <>
       <Header />
-      <div className="page mt-[57px]">
+      <div className="page relative mt-[57px]">
+        <Loader />
         <div className="max-container">
           <p className="text-20 text-red-500">Home page 입니다.</p>
         </div>

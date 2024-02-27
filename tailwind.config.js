@@ -26,6 +26,17 @@ module.exports = {
         10_14: ['10px', '14px'],
         10: ['10px', '100%'],
       },
+      animation: {
+        loading: 'loading 0.5s infinite linear alternate',
+      },
+      keyframes: {
+        loading: {
+          '0%': { boxShadow: '30px 0 #9070CF, -30px 0 #E1D9F2', background: '#9070CF' },
+          '33%': { boxShadow: '30px 0 #9070CF, -30px 0 #E1D9F2', background: '#E1D9F2' },
+          '66%': { boxShadow: '30px 0 #E1D9F2,-30px 0 #9070CF', background: '#E1D9F2' },
+          '100%': { boxShadow: '30px 0 #E1D9F2,-30px 0 #9070CF', background: '#E1D9F2' },
+        },
+      },
     },
   },
   plugins: [
