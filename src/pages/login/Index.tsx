@@ -1,6 +1,7 @@
 import Button from '@/components/atoms/RoundButton';
 import SVGIcon from '@/components/atoms/SVGIcon';
 import Header from '@/components/layouts/Header';
+import SpeechBubble from '@/components/atoms/SpeechBubble';
 import config from '@/config';
 // import { setAlertModal } from '@/reducers/modalReducer';
 // import { useDispatch } from 'react-redux';
@@ -28,16 +29,12 @@ const Login = () => {
         <div className="max-container flex h-[88dvh] items-center justify-center">
           <div className="flex flex-col items-center justify-center">
             <SVGIcon name="seoulSyncLogo" wSize={169} hSize={169} active={false} />
-            <div className="relative mb-3 mt-[113px] h-[41px] w-[282px]">
-              <div className="flex h-[34px] w-full items-center justify-center rounded-2xl text-12 font-semibold text-[#101010] shadow-[2px_2px_8px_rgba(0,0,0,0.1)]">
-                <p>⚡️ 로그인하고 나에게 맞는 코스를 추천 받아보세요!</p>
-              </div>
-              <SVGIcon
-                style="absolute left-[75px] bottom-0"
-                name="downTriangle"
-                wSize={10}
-                hSize={10}
-                active={false}
+            <div className="mb-3 mt-[113px]">
+              <SpeechBubble
+                size="small"
+                direction="bottomLeft"
+                aboutSvgIcon={{ name: 'downTriangle', active: false, wSize: 10, hSize: 10 }}
+                content="⚡️ 로그인하고 나에게 맞는 코스를 추천 받아보세요!"
               />
             </div>
             <Link to={`${config.api.default}/user/login/kakao`} className="mb-3">

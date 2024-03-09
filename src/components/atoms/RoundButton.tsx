@@ -1,7 +1,7 @@
 import SVGIcon from '@/components/atoms/SVGIcon';
-import { buttonStyle } from '@/components/atoms/styles';
+import { buttonStyleType } from '@/components/atoms/styles';
 
-const RoundButton = ({ size, bgColor, textColor, content, aboutSvgIcon }: buttonStyle) => {
+const RoundButton = ({ size, bgColor, textColor, content, aboutSvgIcon }: buttonStyleType) => {
   const bgColorVariants = {
     naverGreen: 'bg-naver',
     kakaoYellow: 'bg-kakao',
@@ -14,9 +14,9 @@ const RoundButton = ({ size, bgColor, textColor, content, aboutSvgIcon }: button
   };
 
   const sizeVariants = {
-    small: 'h-[36px] w-[335px] text-5 font-bold',
-    midium: 'h-[44px] w-[335px] text-5 font-bold',
-    large: 'h-[52px] w-[335px] text-5 font-bold',
+    small: 'h-[36px] w-[335px] text-16',
+    midium: 'h-[44px] w-[335px] text-16',
+    large: 'h-[52px] w-[335px] text-16',
   };
 
   const makeSvgIcon = () => {
@@ -40,7 +40,7 @@ const RoundButton = ({ size, bgColor, textColor, content, aboutSvgIcon }: button
   const makeButton = () => {
     return (
       <div
-        className={`flex cursor-pointer items-center justify-center rounded-lg ${sizeVariants[size]} ${textColorVariants[textColor]} ${bgColorVariants[bgColor]}`}
+        className={`flex cursor-pointer items-center justify-center rounded-lg font-bold ${sizeVariants[size]} ${textColorVariants[textColor]} ${bgColorVariants[bgColor]}`}
       >
         {makeSvgIcon()}
         <p className="ml-2">{content}</p>
