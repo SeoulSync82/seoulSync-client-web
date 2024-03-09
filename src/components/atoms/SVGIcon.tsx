@@ -35,7 +35,7 @@ export type IconType =
   | 'naverIcon'
   | 'googleIcon';
 
-type IconProps = {
+export type IconProps = {
   name: IconType;
   color?: string;
   wSize?: number;
@@ -45,7 +45,7 @@ type IconProps = {
   click?: () => void;
 };
 
-export const SVGIcon = ({ wSize, hSize, name, active, style, click }: IconProps): ReactElement => {
+const SVGIcon = ({ wSize, hSize, name, active, style, click }: IconProps): ReactElement => {
   const iconTypes = {
     home: active ? homeIconActive : homeIcon,
     myCourse: active ? myCourseIconActive : myCourseIcon,

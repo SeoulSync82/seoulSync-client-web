@@ -1,11 +1,13 @@
+import Button from '@/components/atoms/RoundButton';
 import SVGIcon from '@/components/atoms/SVGIcon';
 import Header from '@/components/layouts/Header';
 import config from '@/config';
 // import { setAlertModal } from '@/reducers/modalReducer';
 // import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
   // const dispatch = useDispatch();
   // const onClickKaKao = () => {
   //   dispatch(
@@ -38,25 +40,39 @@ const Login = () => {
                 active={false}
               />
             </div>
-            <Link to={`${config.api.default}/user/login/kakao`}>
-              <div className="mb-3 flex h-[52px] w-[335px] cursor-pointer items-center justify-center rounded-lg bg-[#F5DA35] text-15 font-semibold text-[#101010]">
-                <SVGIcon name="kakaoIcon" wSize={22} hSize={22} active={false} />
-                <p className="ml-2">카카오톡으로 계속하기</p>
-              </div>
+            <Link to={`${config.api.default}/user/login/kakao`} className="mb-3">
+              <Button
+                bgColor="kakaoYellow"
+                aboutSvgIcon={{ name: 'kakaoIcon', active: false, wSize: 22, hSize: 22 }}
+                content="카카오톡으로 계속하기"
+                textColor="gray900"
+                size="large"
+              />
             </Link>
-            <Link to={`${config.api.default}/user/login/naver`}>
-              <div className="mb-3 flex h-[52px] w-[335px] cursor-pointer items-center justify-center rounded-lg bg-[#4DA524] text-15 font-semibold text-white">
-                <SVGIcon name="naverIcon" wSize={22} hSize={22} active={false} />
-                <p className="ml-2">네이버로 계속하기</p>
-              </div>
+            <Link to={`${config.api.default}/user/login/naver`} className="mb-3">
+              <Button
+                bgColor="naverGreen"
+                aboutSvgIcon={{ name: 'naverIcon', active: false, wSize: 22, hSize: 22 }}
+                content="네이버로 계속하기"
+                textColor="white"
+                size="large"
+              />
             </Link>
-            <Link to={`${config.api.default}/user/login/google`}>
-              <div className="mb-[70px] flex h-[52px] w-[335px] cursor-pointer items-center justify-center rounded-lg bg-[#F3F3F3] text-15 font-semibold text-[#101010]">
-                <SVGIcon name="googleIcon" wSize={22} hSize={22} active={false} />
-                <p className="ml-2">구글로 계속하기</p>
-              </div>
+            <Link to={`${config.api.default}/user/login/google`} className="mb-14">
+              <Button
+                bgColor="googleGray"
+                aboutSvgIcon={{ name: 'googleIcon', active: false, wSize: 22, hSize: 22 }}
+                content="구글로 계속하기"
+                textColor="gray900"
+                size="large"
+              />
             </Link>
-            <p className="cursor-pointer text-14 font-semibold text-[#858B93] underline underline-offset-4">
+            <p
+              className="cursor-pointer text-14 font-semibold text-[#858B93] underline underline-offset-4"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
               건너뛰기
             </p>
           </div>
