@@ -18,32 +18,7 @@ import downTriangle from '@/assets/icons/down_triangle.svg?react';
 import kakaoIcon from '@/assets/icons/ic_kakao.svg?react';
 import naverIcon from '@/assets/icons/ic_naver.svg?react';
 import googleIcon from '@/assets/icons/ic_google.svg?react';
-
-export type IconType =
-  | 'home'
-  | 'myCourse'
-  | 'AIRecommend'
-  | 'community'
-  | 'profile'
-  | 'menuLogo'
-  | 'searchIcon'
-  | 'alarmIcon'
-  | 'leftArrowIcon'
-  | 'seoulSyncLogo'
-  | 'downTriangle'
-  | 'kakaoIcon'
-  | 'naverIcon'
-  | 'googleIcon';
-
-export type IconPropsType = {
-  name: IconType;
-  color?: string;
-  wSize?: number;
-  hSize?: number;
-  active: boolean;
-  style?: string;
-  click?: () => void;
-};
+import { IconPropsType } from '@/components/atoms/types';
 
 const SVGIcon = ({ wSize, hSize, name, active, style, click }: IconPropsType): ReactElement => {
   const iconTypes = {

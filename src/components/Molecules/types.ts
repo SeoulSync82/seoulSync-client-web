@@ -4,4 +4,5 @@ export type tabItemType = {
 };
 export type tabGroupPropsType = {
   items: Array<tabItemType>;
+  click?: (item: tabItemType) => void;
 };

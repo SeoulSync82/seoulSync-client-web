@@ -1,4 +1,30 @@
-import { IconPropsType } from '@/components/atoms/SVGIcon';
+import { tabItemType } from '@/components/Molecules/types';
+
+export type IconType =
+  | 'home'
+  | 'myCourse'
+  | 'AIRecommend'
+  | 'community'
+  | 'profile'
+  | 'menuLogo'
+  | 'searchIcon'
+  | 'alarmIcon'
+  | 'leftArrowIcon'
+  | 'seoulSyncLogo'
+  | 'downTriangle'
+  | 'kakaoIcon'
+  | 'naverIcon'
+  | 'googleIcon';
+
+export type IconPropsType = {
+  name: IconType;
+  color?: string;
+  wSize?: number;
+  hSize?: number;
+  active: boolean;
+  style?: string;
+  click?: () => void;
+};
 
 export type buttonSizeType = 'small' | 'midium' | 'large';
 export type speechBubbleSizeType = 'small' | 'midium';
@@ -30,4 +56,5 @@ export type buttonColorType = 'naverGreen' | 'kakaoYellow' | 'googleGray' | 'whi
 export type tabPropsType = {
   active: boolean;
   title: string;
+  click?: (item: tabItemType) => void;
 };
