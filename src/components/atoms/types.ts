@@ -10,20 +10,24 @@ export type speechBubbleDirectionType =
   | 'bottomMiddle'
   | 'bottomRight';
 
-export type buttonStyleType = {
+export type buttonPropsType = {
   size: buttonSizeType;
-  bgColor: RoundButtonBgColorType;
-  textColor: RoundButtonTextColorType;
+  bgColor: buttonColorType;
+  textColor: buttonColorType;
   content: string;
   aboutSvgIcon: IconPropsType;
 };
 
-export type speechBubbleStyleType = {
+export type speechBubblePropsType = {
   size: speechBubbleSizeType;
   direction: speechBubbleDirectionType;
   aboutSvgIcon: IconPropsType;
   content: string;
 };
 
-export type RoundButtonBgColorType = 'naverGreen' | 'kakaoYellow' | 'googleGray';
-export type RoundButtonTextColorType = 'white' | 'gray900';
+export type buttonColorType = 'naverGreen' | 'kakaoYellow' | 'googleGray' | 'white' | 'gray900';
+
+export type tabPropsType = {
+  active: boolean;
+  title: string;
+};
