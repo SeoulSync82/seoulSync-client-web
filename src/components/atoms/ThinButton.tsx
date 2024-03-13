@@ -1,27 +1,90 @@
 import SVGIcon from '@/components/atoms/SVGIcon';
 import { buttonPropsType } from '@/components/atoms/types';
 
-const ThinButton = ({ size, bgColor, textColor, content, aboutSvgIcon }: buttonPropsType) => {
+const ThinButton = ({
+  size,
+  bgColor,
+  textColor,
+  content,
+  aboutSvgIcon,
+  border,
+  borderColor,
+  active,
+  click,
+}: buttonPropsType) => {
   const bgColorVariants = {
+    primary: 'bg-primary-500',
     naverGreen: 'bg-naver',
     kakaoYellow: 'bg-kakao',
     googleGray: 'bg-google',
     white: 'bg-white',
     gray900: 'bg-gray-900',
+    gray100: 'bg-gray-100',
+    gray200: 'bg-gray-200',
+    gray400: 'bg-gray-400',
   };
 
   const textColorVariants = {
+    primary: 'text-primary-500',
     naverGreen: 'text-naver',
     kakaoYellow: 'text-kakao',
     googleGray: 'text-google',
     white: 'text-white',
     gray900: 'text-gray-900',
+    gray100: 'text-gray-100',
+    gray200: 'text-gray-200',
+    gray400: 'text-gray-400',
   };
 
   const sizeVariants = {
-    small: 'h-[46px] w-[125px] text-14',
-    midium: 'h-[44px] w-[335px] text-16',
-    large: 'h-[52px] w-[335px] text-20',
+    small: 'min-h-[46px] text-14',
+    medium: 'min-h-[46px] text-16',
+    large: 'min-h-[52px] text-20',
+  };
+
+  const borderColorVariants = {
+    primary: 'border-primary-500',
+    naverGreen: 'border-naver',
+    kakaoYellow: 'border-kakao',
+    googleGray: 'border-google',
+    white: 'border-white',
+    gray900: 'border-gray-900',
+    gray100: 'border-gray-100',
+    gray200: 'border-gray-200',
+    gray400: 'border-gray-400',
+  };
+
+  const borderVariants = {
+    top: {
+      small: 'border-t-[1px]',
+      medium: 'border-t-4',
+      large: 'border-t-6',
+    },
+    left: {
+      small: 'border-l-[1px]',
+      medium: 'border-t-4',
+      large: 'border-t-6',
+    },
+    right: {
+      small: 'border-t-[1px]',
+      medium: 'border-t-4',
+      large: 'border-t-6',
+    },
+    bottom: {
+      small: 'border-t-[1px]',
+      medium: 'border-t-4',
+      large: 'border-t-6',
+    },
+    x: {
+      small: 'border-x-[1px]',
+      medium: 'border-x-4',
+      large: 'border-x-6',
+    },
+    y: {
+      small: 'border-y-[1px]',
+      medium: 'border-y-4',
+      large: 'border-y-6',
+    },
   };
 
   const makeSvgIcon = () => {
@@ -45,7 +108,10 @@ const ThinButton = ({ size, bgColor, textColor, content, aboutSvgIcon }: buttonP
   const makeButton = () => {
     return (
       <button
-        className={`flex cursor-pointer items-center justify-center ${sizeVariants[size]} ${textColorVariants[textColor]} ${bgColorVariants[bgColor]}`}
+        className={`flex w-full cursor-pointer items-center justify-center ${active ? 'font-bold' : ''} ${border ? borderVariants[border.position][border.size] : ''} ${borderColor ? borderColorVariants[borderColor] : ''} ${sizeVariants[size]} ${textColorVariants[textColor]} ${bgColorVariants[bgColor]}`}
+        onClick={() => {
+          click ? click() : false;
+        }}
       >
         {makeSvgIcon()}
         <p className="ml-2">{content}</p>

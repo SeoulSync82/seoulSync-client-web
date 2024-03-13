@@ -26,8 +26,8 @@ export type IconPropsType = {
   click?: () => void;
 };
 
-export type buttonSizeType = 'small' | 'midium' | 'large';
-export type speechBubbleSizeType = 'small' | 'midium';
+export type buttonSizeType = 'small' | 'medium' | 'large';
+export type speechBubbleSizeType = 'small' | 'medium';
 export type speechBubbleDirectionType =
   | 'topLeft'
   | 'topMiddle'
@@ -36,12 +36,26 @@ export type speechBubbleDirectionType =
   | 'bottomMiddle'
   | 'bottomRight';
 
+export type buttonBorderType = {
+  position: 'top' | 'left' | 'right' | 'bottom' | 'x' | 'y';
+  size: buttonSizeType;
+};
+
+export type buttonClickPropsType = {
+  key: string;
+  content: string;
+};
+
 export type buttonPropsType = {
   size: buttonSizeType;
   bgColor: buttonColorType;
   textColor: buttonColorType;
   content: string;
-  aboutSvgIcon: IconPropsType;
+  aboutSvgIcon?: IconPropsType;
+  border?: buttonBorderType;
+  borderColor?: buttonColorType;
+  active?: boolean;
+  click?: (item?: buttonClickPropsType) => void;
 };
 
 export type speechBubblePropsType = {
@@ -51,7 +65,16 @@ export type speechBubblePropsType = {
   content: string;
 };
 
-export type buttonColorType = 'naverGreen' | 'kakaoYellow' | 'googleGray' | 'white' | 'gray900';
+export type buttonColorType =
+  | 'primary'
+  | 'naverGreen'
+  | 'kakaoYellow'
+  | 'googleGray'
+  | 'white'
+  | 'gray900'
+  | 'gray100'
+  | 'gray200'
+  | 'gray400';
 
 export type tabPropsType = {
   active: boolean;

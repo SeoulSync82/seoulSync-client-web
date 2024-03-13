@@ -3,24 +3,32 @@ import { buttonPropsType } from '@/components/atoms/types';
 
 const RoundButton = ({ size, bgColor, textColor, content, aboutSvgIcon }: buttonPropsType) => {
   const bgColorVariants = {
+    primary: 'bg-primary-500',
     naverGreen: 'bg-naver',
     kakaoYellow: 'bg-kakao',
     googleGray: 'bg-google',
     white: 'bg-white',
     gray900: 'bg-gray-900',
+    gray100: 'bg-gray-100',
+    gray200: 'bg-gray-200',
+    gray400: 'bg-gray-400',
   };
 
   const textColorVariants = {
+    primary: 'text-primary-500',
     naverGreen: 'text-naver',
     kakaoYellow: 'text-kakao',
     googleGray: 'text-google',
     white: 'text-white',
     gray900: 'text-gray-900',
+    gray100: 'text-gray-100',
+    gray200: 'text-gray-200',
+    gray400: 'text-gray-400',
   };
 
   const sizeVariants = {
     small: 'h-[36px] w-[335px] text-16',
-    midium: 'h-[44px] w-[335px] text-16',
+    medium: 'h-[44px] w-[335px] text-16',
     large: 'h-[52px] w-[335px] text-16',
   };
 
