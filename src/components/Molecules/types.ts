@@ -12,4 +12,6 @@ export type tabGroupPropsType = {
 
 export type selectSubwayPropsType = {
   lineList: Array<subwayLineItemType>;
+  subwayList: Array<string>;
+  click: (item: subwayLineItemType) => void;
 };

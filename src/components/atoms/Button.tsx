@@ -1,7 +1,7 @@
 import SVGIcon from '@/components/atoms/SVGIcon';
 import { buttonPropsType } from '@/components/atoms/types';
 
-const ThinButton = ({
+const Button = ({
   size,
   bgColor,
   textColor,
@@ -39,7 +39,7 @@ const ThinButton = ({
   const sizeVariants = {
     small: 'min-h-[46px] text-14',
     medium: 'min-h-[46px] text-16',
-    large: 'min-h-[52px] text-20',
+    large: 'min-h-[76px] text-20',
   };
 
   const borderColorVariants = {
@@ -121,4 +121,4 @@ const ThinButton = ({
 
   return makeButton();
 };
-export default ThinButton;
+export default Button;

@@ -55,7 +55,7 @@ export type buttonPropsType = {
   border?: buttonBorderType;
   borderColor?: buttonColorType;
   active?: boolean;
-  click?: (item?: buttonClickPropsType) => void;
+  click?: () => void;
 };
 
 export type speechBubblePropsType = {
