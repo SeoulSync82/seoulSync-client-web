@@ -1,8 +1,14 @@
 import config from '@/config';
 import AxiosHelper from '@/utils/network/axiosHelper';
-import { baseAPIType } from '@/api/types';
+import type { baseAPIType } from '@/api/types';
 import { AxiosResponse } from 'axios';
-import { APISubwayListParamsType, subwayLineItemType, subwayPaths } from '@/api/subway/types';
+import type { APISubwayListParamsType, subwayLineItemType } from '@/api/subway/types';
+
+const subwayPaths = {
+  subway: (uuid: string) => `/subway/${uuid}`,
+  subwayLine: '/subway/line',
+};
+
 export const subwayAPI = () => {
   const BASE_URL = config.api.default;
   const _network = AxiosHelper()

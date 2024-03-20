@@ -11,6 +11,7 @@ const Button = ({
   borderColor,
   active,
   click,
+  disable,
 }: buttonPropsType) => {
   const bgColorVariants = {
     primary: 'bg-primary-500',
@@ -105,10 +106,13 @@ const Button = ({
     }
   };
 
+  const makeDisableStyle = disable ? 'bg-gray-300' : `${bgColorVariants[bgColor]}`;
+
   const makeButton = () => {
     return (
       <button
-        className={`flex w-full cursor-pointer items-center justify-center ${active ? 'font-bold' : ''} ${border ? borderVariants[border.position][border.size] : ''} ${borderColor ? borderColorVariants[borderColor] : ''} ${sizeVariants[size]} ${textColorVariants[textColor]} ${bgColorVariants[bgColor]}`}
+        className={`flex w-full cursor-pointer items-center justify-center ${makeDisableStyle} ${active ? 'font-bold' : ''} ${border ? borderVariants[border.position][border.size] : ''} ${borderColor ? borderColorVariants[borderColor] : ''} ${sizeVariants[size]} ${textColorVariants[textColor]}`}
+        disabled={disable}
         onClick={() => {
           click ? click() : false;
         }}

@@ -1,23 +1,39 @@
 import { subwayAPI } from '@/api/subway';
-import { subwayLineItemType } from '@/api/subway/types';
-import SelectSubway from '@/components/Molecules/SelectSubway';
-import TabGroup from '@/components/Molecules/TabGroup';
-import { tabItemType } from '@/components/Molecules/types';
+import type { subwayLineItemType } from '@/api/subway/types';
+import SelectSubway from '@/components/organism/SelectSubway';
+import SelectTheme from '@/components/organism/SelectTheme';
+import TabGroup from '@/components/molecules/TabGroup';
+import type { tabItemType } from '@/components/molecules/types';
 import Button from '@/components/atoms/Button';
 import Header from '@/components/layouts/Header';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { themeItem } from '@/api/theme/types';
+import { themeAPI } from '@/api/theme';
+import Loader from '@/components/atoms/Loader';
 
 const AIRecommend = () => {
-  const selectSubwayRef = useRef<HTMLDivElement | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [selectedSubwayLine, setSelectedSubwayLine] = useState<subwayLineItemType>({
+    uuid: '',
+    line: '',
+  });
+
+  const [selectedSubwayItem, setSelectedSubwayItem] = useState<string>('');
 
   const [tabItems, setActivePage] = useState<Array<tabItemType>>([
     { active: true, title: '역주변' },
     { active: false, title: '테마선택' },
     { active: false, title: '커스텀' },
   ]);
-
+  const [selectedTab, setSelectedTab] = useState<string>('역주변');
   const [subwayLine, setSubwayLine] = useState<Array<subwayLineItemType>>([]);
   const [subwayList, setSubwayList] = useState<Array<string>>([]);
+  const [themeList, setThemeList] = useState<Array<themeItem>>([]);
+  const [selectedThemeItem, setSelectedThemeItem] = useState<themeItem>({
+    id: 0,
+    uuid: '',
+    themeName: '',
+  });
   // const onClickTab = (item: tabItemType) => {
   //   const temp = tabItems.map((value) => {
   //     if (item.title === value.title) {
@@ -36,29 +52,100 @@ const AIRecommend = () => {
   // };
 
   useEffect(() => {
+    setSelectedTab(tabItems.filter((item) => item.active === true)[0].title);
+  }, [tabItems]);
+
+  useEffect(() => {
     const subway = subwayAPI();
-    async function fetchAndSetUser() {
+    const theme = themeAPI();
+    async function fetchAndSetData() {
+      const themeResult = theme.getThemeList();
       const result = await subway.getSubwayLine();
       setSubwayLine(result);
+      themeResult.then((data) => {
+        setThemeList(data);
+      });
+      setIsLoading(false);
     }
-    fetchAndSetUser();
+    fetchAndSetData();
   }, []);
 
   const onClickSubwayLine = async (item: subwayLineItemType) => {
     const subway = subwayAPI();
-    const result = await subway.getSubwayList({ uuid: item.uuid });
-    setSubwayList(result);
+    const subwayResult = await subway.getSubwayList({ uuid: item.uuid });
+    setSubwayList(subwayResult);
+  };
+
+  const onClickButton = () => {
+    switch (selectedTab) {
+      case '역주변':
+        setActivePage((prevTabItems) => [
+          { ...prevTabItems[0], active: false },
+          { ...prevTabItems[1], active: true },
+          { ...prevTabItems[2], active: false },
+        ]);
+        break;
+      case '테마선택':
+        setActivePage((prevTabItems) => [
+          { ...prevTabItems[0], active: false },
+          { ...prevTabItems[1], active: false },
+          { ...prevTabItems[2], active: true },
+        ]);
+        break;
+    }
+  };
+
+  const setButtonStatus = (): boolean => {
+    switch (selectedTab) {
+      case '역주변':
+        return selectedSubwayItem === '';
+
+      case '테마선택':
+        return selectedThemeItem.uuid === '';
+      default:
+        return false;
+    }
   };
 
   const makePage = () => {
-    return (
-      <SelectSubway
-        ref={selectSubwayRef}
-        lineList={subwayLine}
-        subwayList={subwayList}
-        click={onClickSubwayLine}
-      />
-    );
+    if (isLoading) {
+      return <Loader />;
+    } else {
+      switch (selectedTab) {
+        case '역주변':
+          return (
+            <SelectSubway
+              selectedSubwayItem={selectedSubwayItem}
+              selectedSubwayLine={selectedSubwayLine}
+              setSelectedSubwayLine={setSelectedSubwayLine}
+              setSelectedSubwayItem={setSelectedSubwayItem}
+              lineList={subwayLine}
+              subwayList={subwayList}
+              click={onClickSubwayLine}
+            />
+          );
+        case '테마선택':
+          return (
+            <SelectTheme
+              themeList={themeList}
+              selectedThemeItem={selectedThemeItem}
+              setSelectedThemeItem={setSelectedThemeItem}
+            />
+          );
+        default:
+          return (
+            <SelectSubway
+              selectedSubwayItem={selectedSubwayItem}
+              selectedSubwayLine={selectedSubwayLine}
+              setSelectedSubwayLine={setSelectedSubwayLine}
+              setSelectedSubwayItem={setSelectedSubwayItem}
+              lineList={subwayLine}
+              subwayList={subwayList}
+              click={onClickSubwayLine}
+            />
+          );
+      }
+    }
   };
 
   return (
@@ -72,8 +159,15 @@ const AIRecommend = () => {
             </div>
           </div>
           <div className="">{makePage()}</div>
-          <div className="fixed bottom-0 w-full">
-            <Button size="large" bgColor="primary" textColor="white" content={'선택하기'} />
+          <div className="fixed bottom-0 w-full max-w-screen-sm">
+            <Button
+              click={onClickButton}
+              size="large"
+              bgColor="primary"
+              textColor="white"
+              content={'선택하기'}
+              disable={setButtonStatus()}
+            />
           </div>
         </div>
       </div>

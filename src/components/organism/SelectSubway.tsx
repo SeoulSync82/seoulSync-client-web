@@ -1,21 +1,16 @@
-import { subwayLineItemType } from '@/api/subway/types';
 import Button from '../atoms/Button';
-import { selectSubwayPropsType } from '@/components/Molecules/types';
+import { selectSubwayPropsType } from '@/components/organism/types';
 import { buttonClickPropsType } from '@/components/atoms/types';
-import { useImperativeHandle, useState } from 'react';
 
-const SelectSubway = ({ lineList, subwayList, click }: selectSubwayPropsType) => {
-  useImperativeHandle(ref, () => ({
-    selectedItem,
-  }));
-
-  const [selectedSubwayLine, setSelectedSubwayLine] = useState<subwayLineItemType>({
-    uuid: '',
-    line: '',
-  });
-
-  const [selectedSubwayItem, setSelectedSubwayItem] = useState<string>('');
-
+const SelectSubway = ({
+  lineList,
+  subwayList,
+  click,
+  setSelectedSubwayLine,
+  setSelectedSubwayItem,
+  selectedSubwayLine,
+  selectedSubwayItem,
+}: selectSubwayPropsType) => {
   const onClickLine = (items: buttonClickPropsType) => {
     setSelectedSubwayLine({ uuid: items.key, line: items.content });
     click({ uuid: items.key, line: items.content });
@@ -23,11 +18,6 @@ const SelectSubway = ({ lineList, subwayList, click }: selectSubwayPropsType) =>
 
   const onClickSubwayItem = (item: string) => {
     setSelectedSubwayItem(item);
-  };
-
-  const selectedItem = {
-    subwayLine: selectedSubwayLine,
-    subway: selectedSubwayItem,
   };
 
   const makeLeftContent = () => {
@@ -93,11 +83,11 @@ const SelectSubway = ({ lineList, subwayList, click }: selectSubwayPropsType) =>
   };
 
   return (
-    <div className="flex h-full w-full">
-      <div className="hide-scroll flex max-h-[calc(100vh-168px)] grow basis-1/3 flex-col overflow-y-auto bg-slate-400">
+    <div className="flex h-full w-full bg-white">
+      <div className="hide-scroll flex max-h-[calc(100vh-168px)] grow basis-1/3 flex-col overflow-y-auto ">
         {makeLeftContent()}
       </div>
-      <div className="hide-scroll flex max-h-[calc(100vh-168px)] grow basis-2/3 flex-col overflow-y-auto">
+      <div className="hide-scroll flex max-h-[calc(100vh-168px)] grow basis-2/3 flex-col overflow-y-auto ">
         {makeRightContent()}
       </div>
     </div>

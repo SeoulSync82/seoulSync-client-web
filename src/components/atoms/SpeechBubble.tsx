@@ -4,7 +4,7 @@ import SVGIcon from '@/components/atoms/SVGIcon';
 const SpeechBubble = ({ size, direction, aboutSvgIcon, content }: speechBubblePropsType) => {
   const sizeVariants = {
     small: { parent: 'h-[41px] w-[282px]', child: 'h-[34px] text-12' },
-    midium: { parent: 'h-[41px] w-[323px]', child: '' },
+    medium: { parent: 'h-[41px] w-[323px]', child: '' },
   };
 
   const directionVariants = {

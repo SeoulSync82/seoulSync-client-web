@@ -1,4 +1,4 @@
-import { tabItemType } from '@/components/Molecules/types';
+import type { tabItemType } from '@/components/molecules/types';
 
 export type IconType =
   | 'home'
@@ -14,7 +14,8 @@ export type IconType =
   | 'downTriangle'
   | 'kakaoIcon'
   | 'naverIcon'
-  | 'googleIcon';
+  | 'googleIcon'
+  | 'cancelIcon';
 
 export type IconPropsType = {
   name: IconType;
@@ -27,7 +28,7 @@ export type IconPropsType = {
 };
 
 export type buttonSizeType = 'small' | 'medium' | 'large';
-export type speechBubbleSizeType = 'small' | 'medium';
+export type etcSizeType = 'small' | 'medium';
 export type speechBubbleDirectionType =
   | 'topLeft'
   | 'topMiddle'
@@ -56,10 +57,11 @@ export type buttonPropsType = {
   borderColor?: buttonColorType;
   active?: boolean;
   click?: () => void;
+  disable: boolean;
 };
 
 export type speechBubblePropsType = {
-  size: speechBubbleSizeType;
+  size: etcSizeType;
   direction: speechBubbleDirectionType;
   aboutSvgIcon: IconPropsType;
   content: string;
@@ -80,4 +82,12 @@ export type tabPropsType = {
   active: boolean;
   title: string;
   click?: (item: tabItemType) => void;
+};
+
+export type chipPropsType = {
+  size: etcSizeType;
+  active: boolean;
+  content: string;
+  click?: () => void;
+  cancelClick: () => void;
 };

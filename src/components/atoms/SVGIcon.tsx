@@ -18,9 +18,18 @@ import downTriangle from '@/assets/icons/down_triangle.svg?react';
 import kakaoIcon from '@/assets/icons/ic_kakao.svg?react';
 import naverIcon from '@/assets/icons/ic_naver.svg?react';
 import googleIcon from '@/assets/icons/ic_google.svg?react';
-import { IconPropsType } from '@/components/atoms/types';
+import cancelIcon from '@/assets/icons/ic_cancel.svg?react';
+import type { IconPropsType } from '@/components/atoms/types';
 
-const SVGIcon = ({ wSize, hSize, name, active, style, click }: IconPropsType): ReactElement => {
+const SVGIcon = ({
+  wSize,
+  hSize,
+  name,
+  active,
+  style,
+  click,
+  color,
+}: IconPropsType): ReactElement => {
   const iconTypes = {
     home: active ? homeIconActive : homeIcon,
     myCourse: active ? myCourseIconActive : myCourseIcon,
@@ -36,10 +45,19 @@ const SVGIcon = ({ wSize, hSize, name, active, style, click }: IconPropsType): R
     kakaoIcon: kakaoIcon,
     naverIcon: naverIcon,
     googleIcon: googleIcon,
+    cancelIcon: cancelIcon,
   };
   const SVGIcon = iconTypes[name];
 
-  return <SVGIcon className={style} width={wSize} height={hSize} onClick={click} />;
+  return (
+    <SVGIcon
+      className={style}
+      width={wSize}
+      height={hSize}
+      onClick={click}
+      fill={color ? color : 'none'}
+    />
+  );
 };
 
 export default SVGIcon;
