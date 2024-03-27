@@ -1,7 +1,7 @@
 import SVGIcon from '@/components/atoms/SVGIcon';
-import { buttonPropsType } from '@/components/atoms/types';
+import { ButtonPropsType } from '@/components/atoms/types';
 
-const RoundButton = ({ size, bgColor, textColor, content, aboutSvgIcon }: buttonPropsType) => {
+const RoundButton = ({ size, bgColor, textColor, content, aboutSvgIcon }: ButtonPropsType) => {
   const bgColorVariants = {
     primary: 'bg-primary-500',
     naverGreen: 'bg-naver',

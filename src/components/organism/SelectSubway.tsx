@@ -1,6 +1,7 @@
 import Button from '../atoms/Button';
-import { selectSubwayPropsType } from '@/components/organism/types';
-import { buttonClickPropsType } from '@/components/atoms/types';
+import type { SelectSubwayPropsType } from '@/components/organism/types';
+import type { ButtonClickPropsType } from '@/components/atoms/types';
+import type { subwayItemType } from '@/api/subway/types';
 
 const SelectSubway = ({
   lineList,
@@ -10,13 +11,13 @@ const SelectSubway = ({
   setSelectedSubwayItem,
   selectedSubwayLine,
   selectedSubwayItem,
-}: selectSubwayPropsType) => {
-  const onClickLine = (items: buttonClickPropsType) => {
+}: SelectSubwayPropsType) => {
+  const onClickLine = (items: ButtonClickPropsType) => {
     setSelectedSubwayLine({ uuid: items.key, line: items.content });
     click({ uuid: items.key, line: items.content });
   };
 
-  const onClickSubwayItem = (item: string) => {
+  const onClickSubwayItem = (item: subwayItemType) => {
     setSelectedSubwayItem(item);
   };
 
@@ -33,6 +34,7 @@ const SelectSubway = ({
             key={item.uuid}
             active={true}
             click={() => onClickLine({ key: item.uuid, content: item.line })}
+            disable={false}
           />
         );
       } else {
@@ -45,6 +47,7 @@ const SelectSubway = ({
             content={item.line}
             key={item.uuid}
             click={() => onClickLine({ key: item.uuid, content: item.line })}
+            disable={false}
           />
         );
       }
@@ -53,7 +56,7 @@ const SelectSubway = ({
 
   const makeRightContent = () => {
     return subwayList.map((item) => {
-      if (selectedSubwayItem === item) {
+      if (selectedSubwayItem.uuid === item.uuid) {
         return (
           <Button
             size="small"
@@ -61,9 +64,10 @@ const SelectSubway = ({
             textColor="white"
             active={true}
             border={{ position: 'bottom', size: 'small' }}
-            content={item}
-            key={item}
+            content={item.station}
+            key={item.uuid}
             click={() => onClickSubwayItem(item)}
+            disable={false}
           />
         );
       } else {
@@ -73,9 +77,10 @@ const SelectSubway = ({
             bgColor="white"
             textColor="gray400"
             border={{ position: 'bottom', size: 'small' }}
-            content={item}
-            key={item}
+            content={item.station}
+            key={item.uuid}
             click={() => onClickSubwayItem(item)}
+            disable={false}
           />
         );
       }

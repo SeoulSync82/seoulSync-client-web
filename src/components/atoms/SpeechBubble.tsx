@@ -1,7 +1,7 @@
-import { speechBubblePropsType } from '@/components/atoms/types';
+import { SpeechBubblePropsType } from '@/components/atoms/types';
 import SVGIcon from '@/components/atoms/SVGIcon';
 
-const SpeechBubble = ({ size, direction, aboutSvgIcon, content }: speechBubblePropsType) => {
+const SpeechBubble = ({ size, direction, aboutSvgIcon, content }: SpeechBubblePropsType) => {
   const sizeVariants = {
     small: { parent: 'h-[41px] w-[282px]', child: 'h-[34px] text-12' },
     medium: { parent: 'h-[41px] w-[323px]', child: '' },

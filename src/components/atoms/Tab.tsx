@@ -1,6 +1,6 @@
-import { tabPropsType } from '@/components/atoms/types';
+import { TabPropsType } from '@/components/atoms/types';
 
-const Tab = ({ active, title, click }: tabPropsType) => {
+const Tab = ({ active, title, click }: TabPropsType) => {
   const activeStyle = active ? 'border-b-2 border-gray-900' : 'border-b-[1px] border-gray-300';
   return (
     <div

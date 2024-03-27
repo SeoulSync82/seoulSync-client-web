@@ -65,15 +65,14 @@ const AlertModal = () => {
           className="fixed inset-0 z-50 flex h-full w-full flex-col items-center justify-center overflow-hidden bg-[#00000033]/20 px-5"
           tabIndex={-1}
         >
-          <div className="flex w-full flex-col items-center justify-center rounded-2xl bg-white px-8">
+          <div className="flex w-full flex-col items-center justify-center rounded-2xl bg-white">
             <div className="mb-4 mt-[34px] text-center">{makeTitle()}</div>
-            <div className="text-center">{makeMessage()}</div>
-            <hr className="mt-[34px] h-px w-full bg-[#EDEDED]" />
+            <div className="mb-6 text-center">{makeMessage()}</div>
             <div
-              className="flex w-full items-center justify-center"
+              className="flex w-full items-center justify-center rounded-b-2xl bg-primary-500"
               onClick={() => onClickSubmit()}
             >
-              <p className="my-5 cursor-pointer text-18 font-bold text-[#4A82EE]">확인</p>
+              <p className="my-5 cursor-pointer text-18 font-bold text-white">확인</p>
             </div>
           </div>
         </div>

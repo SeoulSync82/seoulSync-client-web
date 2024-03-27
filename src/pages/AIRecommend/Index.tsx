@@ -1,55 +1,61 @@
 import { subwayAPI } from '@/api/subway';
-import type { subwayLineItemType } from '@/api/subway/types';
+import type {
+  SubwayCustomPlaceCountType,
+  subwayItemType,
+  subwayLineItemType,
+} from '@/api/subway/types';
 import SelectSubway from '@/components/organism/SelectSubway';
 import SelectTheme from '@/components/organism/SelectTheme';
 import TabGroup from '@/components/molecules/TabGroup';
-import type { tabItemType } from '@/components/molecules/types';
+import type { TabItemType } from '@/components/molecules/types';
 import Button from '@/components/atoms/Button';
 import Header from '@/components/layouts/Header';
 import { useEffect, useState } from 'react';
 import type { themeItem } from '@/api/theme/types';
 import { themeAPI } from '@/api/theme';
 import Loader from '@/components/atoms/Loader';
+import SelectCustomCourse from '@/components/organism/MakeCustomCourse';
+import { useDispatch } from 'react-redux';
+import { setAlertModal } from '@/reducers/modalReducer';
+import { courseAPI } from '@/api/course';
+import type { CourseItemType } from '@/api/course/types';
 
 const AIRecommend = () => {
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [selectedSubwayLine, setSelectedSubwayLine] = useState<subwayLineItemType>({
     uuid: '',
     line: '',
   });
 
-  const [selectedSubwayItem, setSelectedSubwayItem] = useState<string>('');
+  const [course, setCourse] = useState<CourseItemType>({
+    courseUuid: '',
+    courseName: '',
+    subway: { uuid: '', station: '' },
+    line: [],
+    theme: { id: 0, themeName: '', uuid: '' },
+    places: [],
+  });
 
-  const [tabItems, setActivePage] = useState<Array<tabItemType>>([
+  const [selectedSubwayItem, setSelectedSubwayItem] = useState<subwayItemType>({
+    uuid: '',
+    station: '',
+  });
+
+  const [tabItems, setActivePage] = useState<Array<TabItemType>>([
     { active: true, title: '역주변' },
     { active: false, title: '테마선택' },
     { active: false, title: '커스텀' },
   ]);
   const [selectedTab, setSelectedTab] = useState<string>('역주변');
   const [subwayLine, setSubwayLine] = useState<Array<subwayLineItemType>>([]);
-  const [subwayList, setSubwayList] = useState<Array<string>>([]);
+  const [subwayList, setSubwayList] = useState<Array<subwayItemType>>([]);
   const [themeList, setThemeList] = useState<Array<themeItem>>([]);
   const [selectedThemeItem, setSelectedThemeItem] = useState<themeItem>({
     id: 0,
     uuid: '',
     themeName: '',
   });
-  // const onClickTab = (item: tabItemType) => {
-  //   const temp = tabItems.map((value) => {
-  //     if (item.title === value.title) {
-  //       return {
-  //         active: true,
-  //         title: value.title,
-  //       };
-  //     } else {
-  //       return {
-  //         active: false,
-  //         title: value.title,
-  //       };
-  //     }
-  //   });
-  //   setActivePage(temp);
-  // };
 
   useEffect(() => {
     setSelectedTab(tabItems.filter((item) => item.active === true)[0].title);
@@ -76,7 +82,7 @@ const AIRecommend = () => {
     setSubwayList(subwayResult);
   };
 
-  const onClickButton = () => {
+  const onClickButton = async () => {
     switch (selectedTab) {
       case '역주변':
         setActivePage((prevTabItems) => [
@@ -86,11 +92,49 @@ const AIRecommend = () => {
         ]);
         break;
       case '테마선택':
-        setActivePage((prevTabItems) => [
-          { ...prevTabItems[0], active: false },
-          { ...prevTabItems[1], active: false },
-          { ...prevTabItems[2], active: true },
-        ]);
+        const subway = subwayAPI();
+        const customPlaceCount: SubwayCustomPlaceCountType = await subway.getSubwayCustomPlaceCount(
+          {
+            lineUuid: selectedSubwayLine.uuid,
+            stationUuid: selectedSubwayItem.uuid,
+          },
+        );
+        if (
+          customPlaceCount.BAR === 0 ||
+          customPlaceCount.CAFE === 0 ||
+          customPlaceCount.CULTURE === 0 ||
+          customPlaceCount.ENTERTAINMENT === 0 ||
+          customPlaceCount.EXHIBITION === 0 ||
+          customPlaceCount.POPUP === 0 ||
+          customPlaceCount.RESTAURANT === 0 ||
+          customPlaceCount.SHOPPING === 0
+        ) {
+          dispatch(
+            setAlertModal({
+              opened: true,
+              data: {
+                title: '선택한 조건에 맞는 코스가 없어요',
+                message: '다른 역이나 테마로<br/> 다시 검색 해보시겠어요?',
+                messageHTML: true,
+              },
+            }),
+          );
+        } else {
+          const course = courseAPI();
+          const courseResult = await course.getCourse({
+            subwayUuid: selectedSubwayItem.uuid,
+            themeUuid: selectedThemeItem.uuid,
+          });
+          setCourse(courseResult);
+          console.log(courseResult);
+          setActivePage((prevTabItems) => [
+            { ...prevTabItems[0], active: false },
+            { ...prevTabItems[1], active: false },
+            { ...prevTabItems[2], active: true },
+          ]);
+        }
+        break;
+      case '커스텀':
         break;
     }
   };
@@ -98,7 +142,7 @@ const AIRecommend = () => {
   const setButtonStatus = (): boolean => {
     switch (selectedTab) {
       case '역주변':
-        return selectedSubwayItem === '';
+        return selectedSubwayItem.uuid === '';
 
       case '테마선택':
         return selectedThemeItem.uuid === '';
@@ -132,6 +176,9 @@ const AIRecommend = () => {
               setSelectedThemeItem={setSelectedThemeItem}
             />
           );
+        case '커스텀':
+          return <SelectCustomCourse course={course} setCourse={setCourse} />;
+
         default:
           return (
             <SelectSubway

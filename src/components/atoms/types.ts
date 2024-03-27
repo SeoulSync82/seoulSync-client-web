@@ -1,4 +1,4 @@
-import type { tabItemType } from '@/components/molecules/types';
+import type { TabItemType } from '@/components/molecules/types';
 
 export type IconType =
   | 'home'
@@ -27,9 +27,9 @@ export type IconPropsType = {
   click?: () => void;
 };
 
-export type buttonSizeType = 'small' | 'medium' | 'large';
-export type etcSizeType = 'small' | 'medium';
-export type speechBubbleDirectionType =
+export type ButtonSizeType = 'small' | 'medium' | 'large';
+export type EtcSizeType = 'small' | 'medium';
+export type SpeechBubbleDirectionType =
   | 'topLeft'
   | 'topMiddle'
   | 'topRight'
@@ -37,37 +37,37 @@ export type speechBubbleDirectionType =
   | 'bottomMiddle'
   | 'bottomRight';
 
-export type buttonBorderType = {
+export type ButtonBorderType = {
   position: 'top' | 'left' | 'right' | 'bottom' | 'x' | 'y';
-  size: buttonSizeType;
+  size: ButtonSizeType;
 };
 
-export type buttonClickPropsType = {
+export type ButtonClickPropsType = {
   key: string;
   content: string;
 };
 
-export type buttonPropsType = {
-  size: buttonSizeType;
-  bgColor: buttonColorType;
-  textColor: buttonColorType;
+export type ButtonPropsType = {
+  size: ButtonSizeType;
+  bgColor: ButtonColorType;
+  textColor: ButtonColorType;
   content: string;
   aboutSvgIcon?: IconPropsType;
-  border?: buttonBorderType;
-  borderColor?: buttonColorType;
+  border?: ButtonBorderType;
+  borderColor?: ButtonColorType;
   active?: boolean;
   click?: () => void;
   disable: boolean;
 };
 
-export type speechBubblePropsType = {
-  size: etcSizeType;
-  direction: speechBubbleDirectionType;
+export type SpeechBubblePropsType = {
+  size: EtcSizeType;
+  direction: SpeechBubbleDirectionType;
   aboutSvgIcon: IconPropsType;
   content: string;
 };
 
-export type buttonColorType =
+export type ButtonColorType =
   | 'primary'
   | 'naverGreen'
   | 'kakaoYellow'
@@ -78,14 +78,14 @@ export type buttonColorType =
   | 'gray200'
   | 'gray400';
 
-export type tabPropsType = {
+export type TabPropsType = {
   active: boolean;
   title: string;
-  click?: (item: tabItemType) => void;
+  click?: (item: TabItemType) => void;
 };
 
-export type chipPropsType = {
-  size: etcSizeType;
+export type ChipPropsType = {
+  size: EtcSizeType;
   active: boolean;
   content: string;
   click?: () => void;

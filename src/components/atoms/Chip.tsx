@@ -1,7 +1,7 @@
-import { chipPropsType } from '@/components/atoms/types';
+import { ChipPropsType } from '@/components/atoms/types';
 import SVGIcon from '@/components/atoms/SVGIcon';
 
-const Chip = ({ size, content, active, click, cancelClick }: chipPropsType) => {
+const Chip = ({ size, content, active, click, cancelClick }: ChipPropsType) => {
   const sizeVariants = {
     small: 'h-[36px]',
     medium: 'h-[36px]',

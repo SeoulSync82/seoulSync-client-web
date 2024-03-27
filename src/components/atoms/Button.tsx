@@ -1,5 +1,5 @@
 import SVGIcon from '@/components/atoms/SVGIcon';
-import { buttonPropsType } from '@/components/atoms/types';
+import { ButtonPropsType } from '@/components/atoms/types';
 
 const Button = ({
   size,
@@ -12,7 +12,7 @@ const Button = ({
   active,
   click,
   disable,
-}: buttonPropsType) => {
+}: ButtonPropsType) => {
   const bgColorVariants = {
     primary: 'bg-primary-500',
     naverGreen: 'bg-naver',

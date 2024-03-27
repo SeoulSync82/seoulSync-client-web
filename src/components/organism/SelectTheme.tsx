@@ -1,12 +1,12 @@
 import Chip from '../atoms/Chip';
-import type { selectThemePropsType } from '@/components/organism/types';
+import type { SelectThemePropsType } from '@/components/organism/types';
 import type { themeItem } from '@/api/theme/types';
 
 const SelectTheme = ({
   themeList,
   selectedThemeItem,
   setSelectedThemeItem,
-}: selectThemePropsType) => {
+}: SelectThemePropsType) => {
   const onClickTheme = (item: themeItem) => {
     setSelectedThemeItem({ id: item.id, uuid: item.uuid, themeName: item.themeName });
   };

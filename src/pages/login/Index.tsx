@@ -9,18 +9,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  // const onClickKaKao = () => {
-  //   dispatch(
-  //     setAlertModal({
-  //       opened: true,
-  //       data: {
-  //         title: '앗 ..로그인에 실패했어요',
-  //         message: '같은 문제가 반복된다면 앱을 꼈다 켜거나 삭제하고 다시 설치해주세요.',
-  //       },
-  //     }),
-  //   );
-  // };
 
   return (
     <>
@@ -44,6 +32,7 @@ const Login = () => {
                 content="카카오톡으로 계속하기"
                 textColor="gray900"
                 size="large"
+                disable={false}
               />
             </Link>
             <Link to={`${config.api.default}/user/login/naver`} className="mb-3">
@@ -53,6 +42,7 @@ const Login = () => {
                 content="네이버로 계속하기"
                 textColor="white"
                 size="large"
+                disable={false}
               />
             </Link>
             <Link to={`${config.api.default}/user/login/google`} className="mb-14">
@@ -62,6 +52,7 @@ const Login = () => {
                 content="구글로 계속하기"
                 textColor="gray900"
                 size="large"
+                disable={false}
               />
             </Link>
             <p

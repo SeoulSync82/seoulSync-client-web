@@ -1,9 +1,9 @@
-export type tabItemType = {
+export type TabItemType = {
   active: boolean;
   title: string;
 };
 
 export type tabGroupPropsType = {
-  items: Array<tabItemType>;
-  click?: (item: tabItemType) => void;
+  items: Array<TabItemType>;
+  click?: (item: TabItemType) => void;
 };

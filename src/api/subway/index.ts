@@ -2,11 +2,19 @@ import config from '@/config';
 import AxiosHelper from '@/utils/network/axiosHelper';
 import type { baseAPIType } from '@/api/types';
 import { AxiosResponse } from 'axios';
-import type { APISubwayListParamsType, subwayLineItemType } from '@/api/subway/types';
+import type {
+  GetSubwayCustomPlaceCount,
+  APISubwayListParamsType,
+  SubwayCustomPlaceCountType,
+  subwayItemType,
+  subwayLineItemType,
+} from '@/api/subway/types';
 
 const subwayPaths = {
   subway: (uuid: string) => `/subway/${uuid}`,
   subwayLine: '/subway/line',
+  customPlaceCount: (lineUuid: string, stationUuid: string) =>
+    `/subway/${lineUuid}/${stationUuid}/customs-check`,
 };
 
 export const subwayAPI = () => {
@@ -31,12 +39,12 @@ export const subwayAPI = () => {
     return result;
   };
 
-  const getSubwayList = async (params: APISubwayListParamsType): Promise<Array<string>> => {
+  const getSubwayList = async (params: APISubwayListParamsType): Promise<Array<subwayItemType>> => {
     const response = _network.get(subwayPaths.subway(params.uuid));
-    let result: Array<string> = [];
+    let result: Array<subwayItemType> = [];
 
     await response.then((res: AxiosResponse<any, any>) => {
-      const apiResponse: baseAPIType<Array<string>> = {
+      const apiResponse: baseAPIType<Array<subwayItemType>> = {
         status: res.statusText,
         items: res.data.items,
       };
@@ -47,5 +55,34 @@ export const subwayAPI = () => {
     return result;
   };
 
-  return { getSubwayLine, getSubwayList };
+  const getSubwayCustomPlaceCount = async (
+    params: GetSubwayCustomPlaceCount,
+  ): Promise<SubwayCustomPlaceCountType> => {
+    const response = _network.get(
+      subwayPaths.customPlaceCount(params.lineUuid, params.stationUuid),
+    );
+    let result: SubwayCustomPlaceCountType = {
+      RESTAURANT: 0,
+      CAFE: 0,
+      BAR: 0,
+      SHOPPING: 0,
+      CULTURE: 0,
+      ENTERTAINMENT: 0,
+      EXHIBITION: 0,
+      POPUP: 0,
+    };
+
+    await response.then((res: AxiosResponse<any, any>) => {
+      const apiResponse: baseAPIType<SubwayCustomPlaceCountType> = {
+        status: res.statusText,
+        items: res.data.items,
+      };
+
+      result = apiResponse.items;
+    });
+
+    return result;
+  };
+
+  return { getSubwayLine, getSubwayList, getSubwayCustomPlaceCount };
 };

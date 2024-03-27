@@ -1,8 +1,8 @@
-import { tabGroupPropsType, tabItemType } from '@/components/molecules/types';
+import { tabGroupPropsType, TabItemType } from '@/components/molecules/types';
 import Tab from '@/components/atoms/Tab';
 
 const TabGroup = ({ items, click }: tabGroupPropsType) => {
-  const onClickTab = (item: tabItemType) => {
+  const onClickTab = (item: TabItemType) => {
     if (click) {
       click(item);
     }
