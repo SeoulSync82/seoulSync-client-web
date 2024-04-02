@@ -19,6 +19,8 @@ import kakaoIcon from '@/assets/icons/ic_kakao.svg?react';
 import naverIcon from '@/assets/icons/ic_naver.svg?react';
 import googleIcon from '@/assets/icons/ic_google.svg?react';
 import cancelIcon from '@/assets/icons/ic_cancel.svg?react';
+import lineIcon from '@/assets/icons/ic_line.svg?react';
+import plusIcon from '@/assets/icons/ic_plus.svg?react';
 import type { IconPropsType } from '@/components/atoms/types';
 
 const SVGIcon = ({
@@ -46,6 +48,8 @@ const SVGIcon = ({
     naverIcon: naverIcon,
     googleIcon: googleIcon,
     cancelIcon: cancelIcon,
+    lineIcon: lineIcon,
+    plusIcon: plusIcon,
   };
   const SVGIcon = iconTypes[name];
 

@@ -15,7 +15,9 @@ export type IconType =
   | 'kakaoIcon'
   | 'naverIcon'
   | 'googleIcon'
-  | 'cancelIcon';
+  | 'cancelIcon'
+  | 'lineIcon'
+  | 'plusIcon';
 
 export type IconPropsType = {
   name: IconType;
@@ -90,4 +92,10 @@ export type ChipPropsType = {
   content: string;
   click?: () => void;
   cancelClick: () => void;
+};
+
+export type TagPropsType = {
+  size: EtcSizeType;
+  content: string;
+  color: ButtonColorType;
 };
