@@ -53,6 +53,7 @@ const Header = () => {
             wSize={30}
             active={false}
             click={onClickPrevBtn}
+            color="#000"
           />
           <p className="absolute left-1/2 top-1/2 max-h-[48px] max-w-[50%] -translate-x-1/2 -translate-y-1/2  text-16 font-bold text-[#101010]">
             {activePageName}

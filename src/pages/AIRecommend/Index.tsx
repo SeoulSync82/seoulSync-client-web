@@ -127,7 +127,6 @@ const AIRecommend = () => {
             themeUuid: selectedThemeItem.uuid,
           });
           setCourse(courseResult);
-          console.log(courseResult);
           setActivePage((prevTabItems) => [
             { ...prevTabItems[0], active: false },
             { ...prevTabItems[1], active: false },

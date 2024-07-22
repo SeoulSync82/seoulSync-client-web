@@ -37,4 +37,5 @@ export type PlaceItemType = {
   longitude: string;
   score: string;
   placeDetail: string;
+  open: boolean;
 };

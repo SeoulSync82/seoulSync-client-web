@@ -12,6 +12,8 @@ export type TabGroupPropsType = {
 
 export type CustomCourseListItemType = {
   place: PlaceItemType;
+  deleteClick: (item: PlaceItemType) => void;
+  openClick: (item: PlaceItemType) => void;
 };
 
 export type AddCustomPlaceItemPropsType = {

@@ -36,6 +36,9 @@ export const courseAPI = () => {
       };
 
       result = snakeToCamel(apiResponse.items);
+      result.places = result.places.map((item) => {
+        return { ...item, open: false };
+      });
     });
     return result;
   };

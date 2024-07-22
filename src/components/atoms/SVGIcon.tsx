@@ -21,6 +21,7 @@ import googleIcon from '@/assets/icons/ic_google.svg?react';
 import cancelIcon from '@/assets/icons/ic_cancel.svg?react';
 import lineIcon from '@/assets/icons/ic_line.svg?react';
 import plusIcon from '@/assets/icons/ic_plus.svg?react';
+import fullStartIcon from '@/assets/icons/ic_full_star.svg?react';
 import type { IconPropsType } from '@/components/atoms/types';
 
 const SVGIcon = ({
@@ -50,6 +51,7 @@ const SVGIcon = ({
     cancelIcon: cancelIcon,
     lineIcon: lineIcon,
     plusIcon: plusIcon,
+    fullStartIcon: fullStartIcon,
   };
   const SVGIcon = iconTypes[name];
 

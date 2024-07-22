@@ -17,7 +17,8 @@ export type IconType =
   | 'googleIcon'
   | 'cancelIcon'
   | 'lineIcon'
-  | 'plusIcon';
+  | 'plusIcon'
+  | 'fullStartIcon';
 
 export type IconPropsType = {
   name: IconType;
