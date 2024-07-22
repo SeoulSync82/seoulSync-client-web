@@ -1,19 +1,9 @@
 import { MakeCustomCoursePropsType } from '@/components/organism/types';
-import Tag from '../atoms/Tag';
-import CustomCourseListItem from '../molecules/CustomCourseListItem';
+import CustomCourseListItem from '@/components/molecules/CustomCourseListItem';
 import { PlaceItemType } from '@/api/course/types';
+import AddCustomPlaceItem from '@/components/molecules/AddCustomPlaceItem';
 
 const SelectCustomCourse = ({ course, setCourse }: MakeCustomCoursePropsType) => {
-  const makeCourseLine = () => {
-    return course.line.map((item) => {
-      return (
-        <div key={item.uuid} className="mt-4 w-14">
-          <Tag size="small" content={item.line} color="primary" />
-        </div>
-      );
-    });
-  };
-
   const deleteCustomCoursePlaceItem = (item: PlaceItemType) => {
     setCourse({
       ...course,
@@ -46,13 +36,21 @@ const SelectCustomCourse = ({ course, setCourse }: MakeCustomCoursePropsType) =>
     });
   };
 
+  const onClickAddCustomPlace = () => {
+    console.log('aaa');
+  };
+
+  const makeAddCustomPlaceItem = () => {
+    return (
+      <div className="my-4">
+        <AddCustomPlaceItem click={onClickAddCustomPlace} />
+      </div>
+    );
+  };
+
   return (
     <div className="w-full px-5">
-      <div className="mb-4 flex w-full gap-1">{makeCourseLine()}</div>
-      <div className="mb-6 text-20 font-semibold text-black">
-        <p className="mb-2">{course.subway.station + '역'}</p>
-        <p>{course.courseName}</p>
-      </div>
+      {makeAddCustomPlaceItem()}
       {makeCustomCourseList()}
       <div></div>
     </div>

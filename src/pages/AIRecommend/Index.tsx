@@ -19,7 +19,6 @@ import { useDispatch } from 'react-redux';
 import { setAlertModal } from '@/reducers/modalReducer';
 import { courseAPI } from '@/api/course';
 import type { CourseItemType } from '@/api/course/types';
-import AddCustomPlaceItem from '@/components/molecules/AddCustomPlaceItem';
 
 const AIRecommend = () => {
   const dispatch = useDispatch();
@@ -195,22 +194,6 @@ const AIRecommend = () => {
     }
   };
 
-  const onClickAddCustomPlace = () => {
-    console.log('aaa');
-  };
-
-  const makeAddCustomPlaceItem = () => {
-    if (selectedTab === '커스텀') {
-      return (
-        <div className="mx-5 mb-4">
-          <AddCustomPlaceItem click={onClickAddCustomPlace} />
-        </div>
-      );
-    } else {
-      return <></>;
-    }
-  };
-
   return (
     <>
       <div className="page">
@@ -223,13 +206,12 @@ const AIRecommend = () => {
           </div>
           <div className="w-full">{makePage()}</div>
           <div className="fixed bottom-0 w-full max-w-screen-sm">
-            {makeAddCustomPlaceItem()}
             <Button
               click={onClickButton}
               size="large"
               bgColor="primary"
               textColor="white"
-              content={'선택하기'}
+              content={selectedTab === '커스텀' ? '완료' : '선택하기'}
               disable={setButtonStatus()}
             />
           </div>
