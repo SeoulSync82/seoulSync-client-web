@@ -46,7 +46,7 @@ const AlertModal = () => {
   const onClickSubmit = () => {
     if (alertData) {
       if (alertData.useTrigger && alertTrigger) {
-        alertTrigger();
+        alertTrigger('submit');
       } else {
         dispatch(
           setAlertModal({

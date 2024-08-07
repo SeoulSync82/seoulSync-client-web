@@ -1,4 +1,9 @@
-const SET_ALERT_MODAL = 'moal/alert';
+import { PlaceItemType } from '@/api/course/types';
+
+const SET_ALERT_MODAL = 'modal/alert';
+const SET_BOTTOM_SHEET = 'modal/bottomSheet';
+
+export type triggerType = 'cancel' | 'submit';
 
 export type AlertType = {
   opened: boolean;
@@ -9,11 +14,23 @@ export type AlertType = {
     messageHTML?: boolean;
     useTrigger?: boolean;
   };
-  trigger?: () => void;
+  trigger?: (value: triggerType) => void;
+};
+
+export type BottomSheetType = {
+  opened: boolean;
+  data: {
+    title?: string;
+    titleHTML?: boolean;
+    item?: PlaceItemType;
+    useTrigger?: boolean;
+  };
+  trigger?: (value: triggerType) => void;
 };
 
 export type ModalState = {
   alert: AlertType;
+  bottomSheet: BottomSheetType;
 };
 
 export const setAlertModal = (data: ModalState['alert']) => ({
@@ -21,10 +38,19 @@ export const setAlertModal = (data: ModalState['alert']) => ({
   payload: data,
 });
 
+export const setBottomSheetModal = (data: ModalState['bottomSheet']) => ({
+  type: SET_BOTTOM_SHEET,
+  payload: data,
+});
+
 type ModalAction = ReturnType<typeof setAlertModal>;
 
 const initialState: ModalState = {
   alert: {
+    opened: false,
+    data: {},
+  },
+  bottomSheet: {
     opened: false,
     data: {},
   },
@@ -41,6 +67,11 @@ const modalReducer = (state: ModalState = initialState, action: ModalAction) => 
       return {
         ...state,
         alert: action.payload,
+      };
+    case SET_BOTTOM_SHEET:
+      return {
+        ...state,
+        bottomSheet: action.payload,
       };
     default:
       return state;
