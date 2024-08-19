@@ -3,7 +3,7 @@ import CustomCourseListItem from '@/components/molecules/CustomCourseListItem';
 import { PlaceItemType } from '@/api/course/types';
 import AddCustomPlaceItem from '@/components/molecules/AddCustomPlaceItem';
 import { useDispatch } from 'react-redux';
-import { setBottomSheetModal, triggerType } from '@/reducers/modalReducer';
+import { setBottomSheetModal, setToastModal, triggerType } from '@/reducers/modalReducer';
 
 const SelectCustomCourse = ({ course, setCourse }: MakeCustomCoursePropsType) => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const SelectCustomCourse = ({ course, setCourse }: MakeCustomCoursePropsType) =>
       setBottomSheetModal({
         opened: true,
         data: {
-          title: '선택한 조건에 맞는 코스가 없어요',
+          title: '해당 내역을 삭제할까요?',
           item: item,
           useTrigger: true,
         },
@@ -28,6 +28,9 @@ const SelectCustomCourse = ({ course, setCourse }: MakeCustomCoursePropsType) =>
                 ...course,
                 places: placeArray,
               });
+            dispatch(
+              setToastModal({ opened: true, data: { title: '선택하신 장소가 삭제되었어요.' } }),
+            );
           }
         },
       }),

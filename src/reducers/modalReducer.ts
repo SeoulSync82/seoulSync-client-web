@@ -2,6 +2,7 @@ import { PlaceItemType } from '@/api/course/types';
 
 const SET_ALERT_MODAL = 'modal/alert';
 const SET_BOTTOM_SHEET = 'modal/bottomSheet';
+const SET_TOAST_MODAL = 'modal/toast';
 
 export type triggerType = 'cancel' | 'submit';
 
@@ -28,9 +29,18 @@ export type BottomSheetType = {
   trigger?: (value: triggerType) => void;
 };
 
+export type ToastType = {
+  opened: boolean;
+  data: {
+    title?: string;
+    titleHTML?: boolean;
+  };
+};
+
 export type ModalState = {
   alert: AlertType;
   bottomSheet: BottomSheetType;
+  toast: ToastType;
 };
 
 export const setAlertModal = (data: ModalState['alert']) => ({
@@ -43,6 +53,11 @@ export const setBottomSheetModal = (data: ModalState['bottomSheet']) => ({
   payload: data,
 });
 
+export const setToastModal = (data: ModalState['toast']) => ({
+  type: SET_TOAST_MODAL,
+  payload: data,
+});
+
 type ModalAction = ReturnType<typeof setAlertModal>;
 
 const initialState: ModalState = {
@@ -51,6 +66,10 @@ const initialState: ModalState = {
     data: {},
   },
   bottomSheet: {
+    opened: false,
+    data: {},
+  },
+  toast: {
     opened: false,
     data: {},
   },
@@ -72,6 +91,11 @@ const modalReducer = (state: ModalState = initialState, action: ModalAction) => 
       return {
         ...state,
         bottomSheet: action.payload,
+      };
+    case SET_TOAST_MODAL:
+      return {
+        ...state,
+        toast: action.payload,
       };
     default:
       return state;

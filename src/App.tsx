@@ -3,6 +3,7 @@ import { router } from './routes/Index';
 import ModalPortal from '@/utils/portal/portal';
 import AlertModal from './components/modals/AlertModal';
 import BottomSheetModal from './components/modals/BottomSheetModal';
+import ToastModal from './components/modals/ToastModal';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <ModalPortal>
         <AlertModal />
         <BottomSheetModal />
+        <ToastModal />
       </ModalPortal>
     </>
   );
