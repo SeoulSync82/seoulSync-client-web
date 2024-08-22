@@ -4,6 +4,7 @@ import ModalPortal from '@/utils/portal/portal';
 import AlertModal from './components/modals/AlertModal';
 import BottomSheetModal from './components/modals/BottomSheetModal';
 import ToastModal from './components/modals/ToastModal';
+import AddPlaceModal from './components/modals/AddPlaceModal';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <AlertModal />
         <BottomSheetModal />
         <ToastModal />
+        <AddPlaceModal />
       </ModalPortal>
     </>
   );

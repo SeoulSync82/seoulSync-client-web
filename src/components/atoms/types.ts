@@ -18,7 +18,8 @@ export type IconType =
   | 'cancelIcon'
   | 'lineIcon'
   | 'plusIcon'
-  | 'fullStartIcon';
+  | 'fullStartIcon'
+  | 'restaurantIcon';
 
 export type IconPropsType = {
   name: IconType;
