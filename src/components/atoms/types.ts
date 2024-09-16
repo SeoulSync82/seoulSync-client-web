@@ -19,7 +19,13 @@ export type IconType =
   | 'lineIcon'
   | 'plusIcon'
   | 'fullStartIcon'
-  | 'restaurantIcon';
+  | 'restaurantIcon'
+  | 'cafeIcon'
+  | 'wineIcon'
+  | 'shoppingIcon'
+  | 'cultureIcon'
+  | 'cardIcon'
+  | 'logoIcon';
 
 export type IconPropsType = {
   name: IconType;

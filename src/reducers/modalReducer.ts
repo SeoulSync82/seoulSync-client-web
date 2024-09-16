@@ -87,7 +87,7 @@ const initialState: ModalState = {
     data: {},
   },
   addPlace: {
-    opened: false,
+    opened: true,
   },
 };
 

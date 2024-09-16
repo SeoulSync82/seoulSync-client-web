@@ -23,6 +23,12 @@ import lineIcon from '@/assets/icons/ic_line.svg?react';
 import plusIcon from '@/assets/icons/ic_plus.svg?react';
 import fullStartIcon from '@/assets/icons/ic_full_star.svg?react';
 import restaurantIcon from '@/assets/icons/ic_restaurant.svg?react';
+import cafeIcon from '@/assets/icons/ic_cafe.svg?react';
+import wineIcon from '@/assets/icons/ic_wine.svg?react';
+import shoppingIcon from '@/assets/icons/ic_shopping.svg?react';
+import cultureIcon from '@/assets/icons/ic_culture.svg?react';
+import cardIcon from '@/assets/icons/ic_card.svg?react';
+import logoIcon from '@/assets/icons/ic_logo.svg?react';
 import type { IconPropsType } from '@/components/atoms/types';
 
 const SVGIcon = ({
@@ -54,6 +60,12 @@ const SVGIcon = ({
     plusIcon: plusIcon,
     fullStartIcon: fullStartIcon,
     restaurantIcon: restaurantIcon,
+    cafeIcon: cafeIcon,
+    wineIcon: wineIcon,
+    shoppingIcon: shoppingIcon,
+    cultureIcon: cultureIcon,
+    cardIcon: cardIcon,
+    logoIcon: logoIcon,
   };
   const SVGIcon = iconTypes[name];
 

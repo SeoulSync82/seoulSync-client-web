@@ -37,7 +37,7 @@ const SelectTheme = ({
           <p className="font ml-5 flex h-[60px] items-center text-16 font-semibold">
             내가 선택한 테마
           </p>
-          <div className="ml-5 flex flex-row flex-wrap gap-4">
+          <div className="ml-5 flex flex-row flex-wrap gap-2">
             <Chip
               size={'medium'}
               active={true}
@@ -57,7 +57,7 @@ const SelectTheme = ({
       {makeSelectedTheme()}
       <div className="h-[60px] w-full basis-1/2 flex-col">
         <p className="font ml-5 flex h-[60px] items-center text-16 font-semibold">테마 선택하기</p>
-        <div className="ml-5 flex flex-row flex-wrap gap-4">{makeThemeList()}</div>
+        <div className="ml-5 flex flex-row flex-wrap gap-2">{makeThemeList()}</div>
       </div>
     </div>
   );

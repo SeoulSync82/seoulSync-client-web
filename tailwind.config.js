@@ -101,6 +101,9 @@ module.exports = {
             display: 'none',
           },
         },
+        '.custom-clip-path': {
+          'clip-path': 'ellipse(54% 90% at 50% 95%)',
+        },
       });
     }),
   ],
