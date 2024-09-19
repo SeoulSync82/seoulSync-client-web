@@ -21,10 +21,10 @@ export type IconType =
   | 'fullStartIcon'
   | 'restaurantIcon'
   | 'cafeIcon'
-  | 'wineIcon'
+  | 'barIcon'
   | 'shoppingIcon'
   | 'cultureIcon'
-  | 'cardIcon'
+  | 'entertainmentIcon'
   | 'logoIcon';
 
 export type IconPropsType = {
