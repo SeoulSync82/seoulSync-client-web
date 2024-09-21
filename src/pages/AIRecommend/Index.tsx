@@ -19,6 +19,7 @@ import { useDispatch } from 'react-redux';
 import { setAlertModal } from '@/reducers/modalReducer';
 import { courseAPI } from '@/api/course';
 import type { CourseItemType } from '@/api/course/types';
+import { setCustomPlaceCount } from '@/reducers/AIReducer';
 
 const AIRecommend = () => {
   const dispatch = useDispatch();
@@ -131,6 +132,7 @@ const AIRecommend = () => {
             { ...prevTabItems[1], active: false },
             { ...prevTabItems[2], active: true },
           ]);
+          dispatch(setCustomPlaceCount(customPlaceCount));
         }
         break;
       case '커스텀':

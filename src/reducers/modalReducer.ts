@@ -1,4 +1,4 @@
-import { PlaceItemType } from '@/api/course/types';
+import { PlaceItemType, PlaceType } from '@/api/course/types';
 
 const SET_ALERT_MODAL = 'modal/alert';
 const SET_BOTTOM_SHEET = 'modal/bottomSheet';
@@ -6,7 +6,6 @@ const SET_TOAST_MODAL = 'modal/toast';
 const SET_ADD_PLACE = 'modal/addPlace';
 
 export type triggerType = 'cancel' | 'submit';
-export type addPlaceTriggerType = '';
 
 export type AlertType = {
   opened: boolean;
@@ -41,7 +40,7 @@ export type ToastType = {
 
 export type AddPlaceType = {
   opened: boolean;
-  trigger?: (value: addPlaceTriggerType) => void;
+  trigger?: (value: PlaceType | 'none') => void;
 };
 
 export type ModalState = {
@@ -71,7 +70,11 @@ export const setAddPlaceModal = (data: ModalState['addPlace']) => ({
   payload: data,
 });
 
-type ModalAction = ReturnType<typeof setAlertModal>;
+type ModalAction =
+  | ReturnType<typeof setAlertModal>
+  | ReturnType<typeof setBottomSheetModal>
+  | ReturnType<typeof setToastModal>
+  | ReturnType<typeof setAddPlaceModal>;
 
 const initialState: ModalState = {
   alert: {
@@ -87,7 +90,7 @@ const initialState: ModalState = {
     data: {},
   },
   addPlace: {
-    opened: true,
+    opened: false,
   },
 };
 

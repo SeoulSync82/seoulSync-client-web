@@ -6,6 +6,13 @@ export type GetCourseParamsType = {
   themeUuid: string;
 };
 
+export type GetAdditionalPlaceParamsType = {
+  placeUuids: Array<string>;
+  placeType: PlaceType;
+  subwayUuid: string;
+  themeUuid: string;
+};
+
 export type CourseItemType = {
   courseUuid: string;
   courseName: string;

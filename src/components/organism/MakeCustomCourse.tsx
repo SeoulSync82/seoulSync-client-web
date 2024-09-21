@@ -2,11 +2,18 @@ import { MakeCustomCoursePropsType } from '@/components/organism/types';
 import CustomCourseListItem from '@/components/molecules/CustomCourseListItem';
 import { PlaceItemType } from '@/api/course/types';
 import AddCustomPlaceItem from '@/components/molecules/AddCustomPlaceItem';
-import { useDispatch } from 'react-redux';
-import { setBottomSheetModal, setToastModal, triggerType } from '@/reducers/modalReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setAddPlaceModal,
+  setBottomSheetModal,
+  setToastModal,
+  triggerType,
+} from '@/reducers/modalReducer';
+import { RootState } from '@/reducers';
 
 const SelectCustomCourse = ({ course, setCourse }: MakeCustomCoursePropsType) => {
   const dispatch = useDispatch();
+  const customPlaceCount = useSelector((state: RootState) => state.aiReducer?.customPlaceCount);
 
   const deleteCustomCoursePlaceItem = (item: PlaceItemType) => {
     dispatch(
@@ -63,7 +70,34 @@ const SelectCustomCourse = ({ course, setCourse }: MakeCustomCoursePropsType) =>
   };
 
   const onClickAddCustomPlace = () => {
-    console.log('aaa');
+    dispatch(
+      setAddPlaceModal({
+        opened: true,
+        trigger: (place) => {
+          if (place === 'none') {
+            dispatch(
+              setToastModal({
+                opened: true,
+                data: { title: '장소 항목을 선택해 주세요!' },
+              }),
+            );
+          } else {
+            if (place === '음식점') {
+              if (customPlaceCount?.RESTAURANT === 0) {
+                dispatch(
+                  setToastModal({
+                    opened: true,
+                    data: { title: '앗.. 해당 장소에 적합한 곳이 없어요.' },
+                  }),
+                );
+                return;
+              } else {
+              }
+            }
+          }
+        },
+      }),
+    );
   };
 
   const makeAddCustomPlaceItem = () => {

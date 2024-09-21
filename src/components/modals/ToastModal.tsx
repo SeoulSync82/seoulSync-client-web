@@ -9,7 +9,9 @@ const ToastModal = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setTimeout(() => dispatch(setToastModal({ opened: false, data: {} })), 5000);
+    if (isToastModalOpen) {
+      setTimeout(() => dispatch(setToastModal({ opened: false, data: {} })), 5000);
+    }
   });
 
   const makeTitle = () => {

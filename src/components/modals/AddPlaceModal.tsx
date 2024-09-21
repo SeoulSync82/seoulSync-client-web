@@ -4,22 +4,55 @@ import SVGIcon from '@/components/atoms/SVGIcon';
 import { PlaceType } from '@/api/course/types';
 import { useState } from 'react';
 import { AddPlaceModalItemStateType } from '@/components/modals/types';
+import { setAddPlaceModal } from '@/reducers/modalReducer';
 
 const AddPlaceModal = () => {
   const isAddPlaceOpen = useSelector((state: RootState) => state.modalReducer?.addPlace.opened);
   const modalTrigger = useSelector((state: RootState) => state.modalReducer?.addPlace.trigger);
   const dispatch = useDispatch();
   const [stateIcons, setStateIcons] = useState<AddPlaceModalItemStateType>({
-    restaurantState: false,
-    cafeState: false,
-    barState: false,
-    shoppingState: false,
-    cultureState: false,
-    entertainmentState: false,
+    음식점: false,
+    카페: false,
+    술집: false,
+    쇼핑: false,
+    문화: false,
+    놀거리: false,
   });
 
   const addPlace = () => {
-    console.log('aaa');
+    let isSelected: boolean = false;
+
+    if (modalTrigger) {
+      Object.entries(stateIcons).map(([key, value]) => {
+        if (value) {
+          isSelected = true;
+          modalTrigger(key as PlaceType);
+          dispatch(
+            setAddPlaceModal({
+              opened: false,
+            }),
+          );
+          return;
+        }
+      });
+
+      if (!isSelected) {
+        modalTrigger('none');
+        dispatch(
+          setAddPlaceModal({
+            opened: false,
+          }),
+        );
+      }
+    }
+    setStateIcons({
+      음식점: false,
+      카페: false,
+      술집: false,
+      쇼핑: false,
+      문화: false,
+      놀거리: false,
+    });
   };
 
   const makeIcon = (name: PlaceType, isChecked: boolean) => {
@@ -156,7 +189,7 @@ const AddPlaceModal = () => {
     }
   };
 
-  const makeAlertModal = () => {
+  const makeAddPlaceModal = () => {
     if (isAddPlaceOpen) {
       return (
         <div
@@ -167,86 +200,86 @@ const AddPlaceModal = () => {
             <div
               onClick={() =>
                 setStateIcons({
-                  restaurantState: !stateIcons.restaurantState,
-                  cafeState: false,
-                  barState: false,
-                  shoppingState: false,
-                  cultureState: false,
-                  entertainmentState: false,
+                  음식점: !stateIcons.음식점,
+                  카페: false,
+                  술집: false,
+                  쇼핑: false,
+                  문화: false,
+                  놀거리: false,
                 })
               }
             >
-              {makeIcon(PlaceType['RESTAURANT'], stateIcons.restaurantState)}
+              {makeIcon(PlaceType['RESTAURANT'], stateIcons.음식점)}
             </div>
             <div
               onClick={() =>
                 setStateIcons({
-                  restaurantState: false,
-                  cafeState: !stateIcons.cafeState,
-                  barState: false,
-                  shoppingState: false,
-                  cultureState: false,
-                  entertainmentState: false,
+                  음식점: false,
+                  카페: !stateIcons.카페,
+                  술집: false,
+                  쇼핑: false,
+                  문화: false,
+                  놀거리: false,
                 })
               }
             >
-              {makeIcon(PlaceType['CAFE'], stateIcons.cafeState)}
+              {makeIcon(PlaceType['CAFE'], stateIcons.카페)}
             </div>
             <div
               onClick={() =>
                 setStateIcons({
-                  restaurantState: false,
-                  cafeState: false,
-                  barState: !stateIcons.barState,
-                  shoppingState: false,
-                  cultureState: false,
-                  entertainmentState: false,
+                  음식점: false,
+                  카페: false,
+                  술집: !stateIcons.술집,
+                  쇼핑: false,
+                  문화: false,
+                  놀거리: false,
                 })
               }
             >
-              {makeIcon(PlaceType['BAR'], stateIcons.barState)}
+              {makeIcon(PlaceType['BAR'], stateIcons.술집)}
             </div>
             <div
               onClick={() =>
                 setStateIcons({
-                  restaurantState: false,
-                  cafeState: false,
-                  barState: false,
-                  shoppingState: !stateIcons.shoppingState,
-                  cultureState: false,
-                  entertainmentState: false,
+                  음식점: false,
+                  카페: false,
+                  술집: false,
+                  쇼핑: !stateIcons.쇼핑,
+                  문화: false,
+                  놀거리: false,
                 })
               }
             >
-              {makeIcon(PlaceType['SHOPPING'], stateIcons.shoppingState)}
+              {makeIcon(PlaceType['SHOPPING'], stateIcons.쇼핑)}
             </div>
             <div
               onClick={() =>
                 setStateIcons({
-                  restaurantState: false,
-                  cafeState: false,
-                  barState: false,
-                  shoppingState: false,
-                  cultureState: !stateIcons.cultureState,
-                  entertainmentState: false,
+                  음식점: false,
+                  카페: false,
+                  술집: false,
+                  쇼핑: false,
+                  문화: !stateIcons.문화,
+                  놀거리: false,
                 })
               }
             >
-              {makeIcon(PlaceType['CULTURE'], stateIcons.cultureState)}
+              {makeIcon(PlaceType['CULTURE'], stateIcons.문화)}
             </div>
             <div
               onClick={() =>
                 setStateIcons({
-                  restaurantState: false,
-                  cafeState: false,
-                  barState: false,
-                  shoppingState: false,
-                  cultureState: false,
-                  entertainmentState: !stateIcons.entertainmentState,
+                  음식점: false,
+                  카페: false,
+                  술집: false,
+                  쇼핑: false,
+                  문화: false,
+                  놀거리: !stateIcons.놀거리,
                 })
               }
             >
-              {makeIcon(PlaceType['ENTERTAINMENT'], stateIcons.entertainmentState)}
+              {makeIcon(PlaceType['ENTERTAINMENT'], stateIcons.놀거리)}
             </div>
             <div
               onClick={() => addPlace()}
@@ -261,7 +294,7 @@ const AddPlaceModal = () => {
       return <></>;
     }
   };
-  return makeAlertModal();
+  return makeAddPlaceModal();
 };
 
 export default AddPlaceModal;

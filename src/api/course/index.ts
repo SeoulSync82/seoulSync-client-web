@@ -1,12 +1,18 @@
 import config from '@/config';
 import AxiosHelper from '@/utils/network/axiosHelper';
-import type { CourseItemType, GetCourseParamsType } from '@/api/course/types';
+import type {
+  GetAdditionalPlaceParamsType,
+  CourseItemType,
+  GetCourseParamsType,
+  PlaceItemType,
+} from '@/api/course/types';
 import type { baseAPIType } from '@/api/types';
 import { AxiosResponse } from 'axios';
 import { snakeToCamel } from '@/utils/commons/notation';
 
 const coursePaths = {
   course: '/course/recommend',
+  getAdditionalPlace: '/course/place/customize',
 };
 
 export const courseAPI = () => {
@@ -43,5 +49,36 @@ export const courseAPI = () => {
     return result;
   };
 
-  return { getCourse };
+  const getAdditionalPlace = async (params: GetAdditionalPlaceParamsType) => {
+    const response = _network.get(coursePaths.getAdditionalPlace, {
+      place_uuids: params.placeUuids,
+      place_type: params.placeType,
+      subway_uuid: params.subwayUuid,
+      theme_uuid: params.themeUuid,
+    });
+    let result: PlaceItemType = {
+      sort: 0,
+      uuid: '',
+      placeName: '',
+      placeType: '',
+      thumbnail: '',
+      address: '',
+      latitude: '',
+      longitude: '',
+      score: '',
+      placeDetail: '',
+      open: false,
+    };
+    await response.then((res: AxiosResponse<any, any>) => {
+      const apiResponse: baseAPIType<PlaceItemType> = {
+        status: res.statusText,
+        items: res.data,
+      };
+
+      result = snakeToCamel(apiResponse.items);
+      return { ...result, open: false, sort: 0 };
+    });
+  };
+
+  return { getCourse, getAdditionalPlace };
 };
