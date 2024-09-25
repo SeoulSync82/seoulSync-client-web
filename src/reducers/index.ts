@@ -7,7 +7,7 @@ const rootReducer = combineReducers({
 });
 
 export type RootState = {
-  modalReducer: ModalState | undefined;
-  aiReducer: AIState | undefined;
+  modalReducer: ModalState;
+  aiReducer: AIState;
 };
 export default rootReducer;

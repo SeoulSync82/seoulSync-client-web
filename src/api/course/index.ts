@@ -72,12 +72,13 @@ export const courseAPI = () => {
     await response.then((res: AxiosResponse<any, any>) => {
       const apiResponse: baseAPIType<PlaceItemType> = {
         status: res.statusText,
-        items: res.data,
+        items: res.data.items,
       };
 
       result = snakeToCamel(apiResponse.items);
-      return { ...result, open: false, sort: 0 };
+      result = { ...result, open: false, sort: 0 };
     });
+    return result;
   };
 
   return { getCourse, getAdditionalPlace };

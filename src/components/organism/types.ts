@@ -1,4 +1,3 @@
-import { CourseItemType } from '@/api/course/types';
 import type { subwayItemType, subwayLineItemType } from '@/api/subway/types';
 import type { themeItem } from '@/api/theme/types';
 
@@ -16,9 +15,4 @@ export type SelectThemePropsType = {
   themeList: Array<themeItem>;
   selectedThemeItem: themeItem;
   setSelectedThemeItem: (item: themeItem) => void;
-};
-
-export type MakeCustomCoursePropsType = {
-  course: CourseItemType;
-  setCourse: (item: CourseItemType) => void;
 };

@@ -8,7 +8,7 @@ export type GetCourseParamsType = {
 
 export type GetAdditionalPlaceParamsType = {
   placeUuids: Array<string>;
-  placeType: PlaceType;
+  placeType: string;
   subwayUuid: string;
   themeUuid: string;
 };

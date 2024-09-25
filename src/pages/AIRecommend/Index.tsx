@@ -18,8 +18,7 @@ import SelectCustomCourse from '@/components/organism/MakeCustomCourse';
 import { useDispatch } from 'react-redux';
 import { setAlertModal } from '@/reducers/modalReducer';
 import { courseAPI } from '@/api/course';
-import type { CourseItemType } from '@/api/course/types';
-import { setCustomPlaceCount } from '@/reducers/AIReducer';
+import { setCourseData, setCustomPlaceCount } from '@/reducers/AIReducer';
 
 const AIRecommend = () => {
   const dispatch = useDispatch();
@@ -27,15 +26,6 @@ const AIRecommend = () => {
   const [selectedSubwayLine, setSelectedSubwayLine] = useState<subwayLineItemType>({
     uuid: '',
     line: '',
-  });
-
-  const [course, setCourse] = useState<CourseItemType>({
-    courseUuid: '',
-    courseName: '',
-    subway: { uuid: '', station: '' },
-    line: [],
-    theme: { id: 0, themeName: '', uuid: '' },
-    places: [],
   });
 
   const [selectedSubwayItem, setSelectedSubwayItem] = useState<subwayItemType>({
@@ -101,13 +91,13 @@ const AIRecommend = () => {
           },
         );
         if (
-          customPlaceCount.BAR === 0 ||
-          customPlaceCount.CAFE === 0 ||
-          customPlaceCount.CULTURE === 0 ||
-          customPlaceCount.ENTERTAINMENT === 0 ||
-          customPlaceCount.EXHIBITION === 0 ||
-          customPlaceCount.POPUP === 0 ||
-          customPlaceCount.RESTAURANT === 0 ||
+          customPlaceCount.BAR === 0 &&
+          customPlaceCount.CAFE === 0 &&
+          customPlaceCount.CULTURE === 0 &&
+          customPlaceCount.ENTERTAINMENT === 0 &&
+          customPlaceCount.EXHIBITION === 0 &&
+          customPlaceCount.POPUP === 0 &&
+          customPlaceCount.RESTAURANT === 0 &&
           customPlaceCount.SHOPPING === 0
         ) {
           dispatch(
@@ -126,7 +116,7 @@ const AIRecommend = () => {
             subwayUuid: selectedSubwayItem.uuid,
             themeUuid: selectedThemeItem.uuid,
           });
-          setCourse(courseResult);
+          dispatch(setCourseData(courseResult));
           setActivePage((prevTabItems) => [
             { ...prevTabItems[0], active: false },
             { ...prevTabItems[1], active: false },
@@ -178,7 +168,7 @@ const AIRecommend = () => {
             />
           );
         case '커스텀':
-          return <SelectCustomCourse course={course} setCourse={setCourse} />;
+          return <SelectCustomCourse />;
 
         default:
           return (
