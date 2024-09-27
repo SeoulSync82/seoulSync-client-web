@@ -196,7 +196,7 @@ const AIRecommend = () => {
               <TabGroup items={tabItems} />
             </div>
           </div>
-          <div className="w-full">{makePage()}</div>
+          <div className="w-full overflow-scroll">{makePage()}</div>
           <div className="fixed bottom-0 w-full max-w-screen-sm">
             <Button
               click={onClickButton}
