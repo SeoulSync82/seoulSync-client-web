@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import SVGIcon, { IconType } from '../atoms/SVGIcon';
+import SVGIcon from '../atoms/SVGIcon';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { IconType } from '@/components/atoms/types';
 
 type menuType = {
   key: IconType;

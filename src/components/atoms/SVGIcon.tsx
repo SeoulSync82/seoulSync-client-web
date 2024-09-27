@@ -18,34 +18,28 @@ import downTriangle from '@/assets/icons/down_triangle.svg?react';
 import kakaoIcon from '@/assets/icons/ic_kakao.svg?react';
 import naverIcon from '@/assets/icons/ic_naver.svg?react';
 import googleIcon from '@/assets/icons/ic_google.svg?react';
+import cancelIcon from '@/assets/icons/ic_cancel.svg?react';
+import lineIcon from '@/assets/icons/ic_line.svg?react';
+import plusIcon from '@/assets/icons/ic_plus.svg?react';
+import fullStartIcon from '@/assets/icons/ic_full_star.svg?react';
+import restaurantIcon from '@/assets/icons/ic_restaurant.svg?react';
+import cafeIcon from '@/assets/icons/ic_cafe.svg?react';
+import barIcon from '@/assets/icons/ic_bar.svg?react';
+import shoppingIcon from '@/assets/icons/ic_shopping.svg?react';
+import cultureIcon from '@/assets/icons/ic_culture.svg?react';
+import entertainmentIcon from '@/assets/icons/ic_entertainment.svg?react';
+import logoIcon from '@/assets/icons/ic_logo.svg?react';
+import type { IconPropsType } from '@/components/atoms/types';
 
-export type IconType =
-  | 'home'
-  | 'myCourse'
-  | 'AIRecommend'
-  | 'community'
-  | 'profile'
-  | 'menuLogo'
-  | 'searchIcon'
-  | 'alarmIcon'
-  | 'leftArrowIcon'
-  | 'seoulSyncLogo'
-  | 'downTriangle'
-  | 'kakaoIcon'
-  | 'naverIcon'
-  | 'googleIcon';
-
-type IconProps = {
-  name: IconType;
-  color?: string;
-  wSize?: number;
-  hSize?: number;
-  active: boolean;
-  style?: string;
-  click?: () => void;
-};
-
-export const SVGIcon = ({ wSize, hSize, name, active, style, click }: IconProps): ReactElement => {
+const SVGIcon = ({
+  wSize,
+  hSize,
+  name,
+  active,
+  style,
+  click,
+  color,
+}: IconPropsType): ReactElement => {
   const iconTypes = {
     home: active ? homeIconActive : homeIcon,
     myCourse: active ? myCourseIconActive : myCourseIcon,
@@ -61,10 +55,29 @@ export const SVGIcon = ({ wSize, hSize, name, active, style, click }: IconProps)
     kakaoIcon: kakaoIcon,
     naverIcon: naverIcon,
     googleIcon: googleIcon,
+    cancelIcon: cancelIcon,
+    lineIcon: lineIcon,
+    plusIcon: plusIcon,
+    fullStartIcon: fullStartIcon,
+    restaurantIcon: restaurantIcon,
+    cafeIcon: cafeIcon,
+    barIcon: barIcon,
+    shoppingIcon: shoppingIcon,
+    cultureIcon: cultureIcon,
+    entertainmentIcon: entertainmentIcon,
+    logoIcon: logoIcon,
   };
   const SVGIcon = iconTypes[name];
 
-  return <SVGIcon className={style} width={wSize} height={hSize} onClick={click} />;
+  return (
+    <SVGIcon
+      className={style}
+      width={wSize}
+      height={hSize}
+      onClick={click}
+      fill={color ? color : 'none'}
+    />
+  );
 };
 
 export default SVGIcon;

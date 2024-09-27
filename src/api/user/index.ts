@@ -3,7 +3,7 @@ import AxiosHelper from '@/utils/network/axiosHelper';
 export const userAPI = () => {
   const BASE_URL = config.api.default;
   const _network = AxiosHelper()
-    .setAuthorization(localStorage.getItem('eid_access_token'))
+    .setAuthorization(localStorage.getItem('access_token'))
     .setBaseUrl(BASE_URL)
     .build();
 
