@@ -17,14 +17,9 @@ export type CourseItemType = {
   courseUuid: string;
   courseName: string;
   subway: subwayItemType;
-  line: Array<subwayLineItemType>;
+  line?: Array<subwayLineItemType>;
   theme: themeItem;
   places: Array<PlaceItemType>;
-};
-
-export type CreateCourseParamsType = CourseItemType & {
-  subwayUuid: string;
-  themeUuid: string;
 };
 
 export enum PlaceType {

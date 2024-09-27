@@ -1,6 +1,6 @@
 import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
 import queryString from 'query-string';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 const AxiosHelper = () => {
   let _baseUrl = '';
@@ -38,8 +38,7 @@ const AxiosHelper = () => {
 
       return data;
     } catch (e) {
-      console.log('리프레쉬 토큰 재발급 호출 실패', e);
-      throw e;
+      throw 'refreshError';
     }
   };
 

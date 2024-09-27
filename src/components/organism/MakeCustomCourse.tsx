@@ -16,6 +16,7 @@ const SelectCustomCourse = () => {
   const dispatch = useDispatch();
   const customPlaceCount = useSelector((state: RootState) => state.aiReducer.customPlaceCount);
   const courseData: CourseItemType = useSelector((state: RootState) => state.aiReducer.course);
+  const course = courseAPI();
 
   const sortPlaces = (places: Array<PlaceItemType>): Array<PlaceItemType> => {
     let sortedPlaces = places.map((place, index) => {
@@ -110,7 +111,6 @@ const SelectCustomCourse = () => {
                   );
                   return;
                 } else {
-                  const course = courseAPI();
                   let tempPlaces: Array<PlaceItemType> = courseData.places;
                   let placeUuids: Array<string> = [];
                   courseData.places.map((place) => {
@@ -137,7 +137,6 @@ const SelectCustomCourse = () => {
                   );
                   return;
                 } else {
-                  const course = courseAPI();
                   let tempPlaces: Array<PlaceItemType> = courseData.places;
                   let placeUuids: Array<string> = [];
                   courseData.places.map((place) => {
@@ -164,7 +163,6 @@ const SelectCustomCourse = () => {
                   );
                   return;
                 } else {
-                  const course = courseAPI();
                   let tempPlaces: Array<PlaceItemType> = courseData.places;
                   let placeUuids: Array<string> = [];
                   courseData.places.map((place) => {
@@ -191,7 +189,6 @@ const SelectCustomCourse = () => {
                   );
                   return;
                 } else {
-                  const course = courseAPI();
                   let tempPlaces: Array<PlaceItemType> = courseData.places;
                   let placeUuids: Array<string> = [];
                   courseData.places.map((place) => {
@@ -218,7 +215,6 @@ const SelectCustomCourse = () => {
                   );
                   return;
                 } else {
-                  const course = courseAPI();
                   let tempPlaces: Array<PlaceItemType> = courseData.places;
                   let placeUuids: Array<string> = [];
                   courseData.places.map((place) => {
@@ -245,7 +241,6 @@ const SelectCustomCourse = () => {
                   );
                   return;
                 } else {
-                  const course = courseAPI();
                   let tempPlaces: Array<PlaceItemType> = courseData.places;
                   let placeUuids: Array<string> = [];
                   courseData.places.map((place) => {

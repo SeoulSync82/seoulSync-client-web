@@ -5,7 +5,6 @@ import type {
   CourseItemType,
   GetCourseParamsType,
   PlaceItemType,
-  CreateCourseParamsType,
 } from '@/api/course/types';
 import type { baseAPIType } from '@/api/types';
 import { AxiosResponse } from 'axios';
@@ -75,9 +74,19 @@ export const courseAPI = () => {
     return result;
   };
 
-  const createCourse = async (params: CreateCourseParamsType) => {
+  const createCourse = async (params: CourseItemType) => {
     const response = _network.post(coursePaths.createCourse, camelToSnake(params));
+    let result: string = '';
+    await response.then((res: AxiosResponse<any, any>) => {
+      const apiResponse: baseAPIType<string> = {
+        status: res.statusText,
+        items: res.data.items,
+      };
+
+      result = apiResponse.items;
+    });
+    return result;
   };
 
-  return { getCourse, getAdditionalPlace };
+  return { getCourse, getAdditionalPlace, createCourse };
 };

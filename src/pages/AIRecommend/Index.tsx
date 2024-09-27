@@ -15,14 +15,20 @@ import type { themeItem } from '@/api/theme/types';
 import { themeAPI } from '@/api/theme';
 import Loader from '@/components/atoms/Loader';
 import SelectCustomCourse from '@/components/organism/MakeCustomCourse';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAlertModal } from '@/reducers/modalReducer';
 import { courseAPI } from '@/api/course';
 import { setCourseData, setCustomPlaceCount } from '@/reducers/AIReducer';
+import { RootState } from '@/reducers';
+import { CourseItemType } from '@/api/course/types';
+import { useNavigate } from 'react-router';
 
 const AIRecommend = () => {
   const dispatch = useDispatch();
+  const course = courseAPI();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const courseData: CourseItemType = useSelector((state: RootState) => state.aiReducer.course);
   const [selectedSubwayLine, setSelectedSubwayLine] = useState<subwayLineItemType>({
     uuid: '',
     line: '',
@@ -111,7 +117,6 @@ const AIRecommend = () => {
             }),
           );
         } else {
-          const course = courseAPI();
           const courseResult = await course.getCourse({
             subwayUuid: selectedSubwayItem.uuid,
             themeUuid: selectedThemeItem.uuid,
@@ -126,6 +131,8 @@ const AIRecommend = () => {
         }
         break;
       case '커스텀':
+        const courseResult = await course.createCourse({ ...courseData, line: undefined });
+        navigate(`/myCourse/detail/${courseResult}`);
         break;
     }
   };
