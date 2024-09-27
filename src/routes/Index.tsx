@@ -6,6 +6,8 @@ import AIRecommend from '@/pages/AIRecommend/Index';
 import Community from '@/pages/community/Index';
 import Profile from '@/pages/profile/Index';
 import Login from '@/pages/login/Index';
+import MyCourseDetail from '@/pages/myCourse/detail';
+import MyCourseList from '@/pages/myCourse/list';
 
 export const router = createBrowserRouter([
   {
@@ -13,7 +15,14 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-      { path: '/myCourse', element: <MyCourse /> },
+      {
+        path: '/myCourse',
+        element: <MyCourse />,
+        children: [
+          { index: true, element: <MyCourseList /> },
+          { path: 'detail/:courseId', element: <MyCourseDetail /> },
+        ],
+      },
       { path: '/AIRecommend', element: <AIRecommend /> },
       { path: '/community', element: <Community /> },
       { path: '/profile', element: <Profile /> },

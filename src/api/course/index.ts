@@ -5,14 +5,16 @@ import type {
   CourseItemType,
   GetCourseParamsType,
   PlaceItemType,
+  CreateCourseParamsType,
 } from '@/api/course/types';
 import type { baseAPIType } from '@/api/types';
 import { AxiosResponse } from 'axios';
-import { snakeToCamel } from '@/utils/commons/notation';
+import { camelToSnake, snakeToCamel } from '@/utils/commons/notation';
 
 const coursePaths = {
   course: '/course/recommend',
   getAdditionalPlace: '/course/place/customize',
+  createCourse: '/course/recommend/save',
 };
 
 export const courseAPI = () => {
@@ -23,10 +25,7 @@ export const courseAPI = () => {
     .build();
 
   const getCourse = async (params: GetCourseParamsType): Promise<CourseItemType> => {
-    const response = _network.get(coursePaths.course, {
-      subway_uuid: params.subwayUuid,
-      theme_uuid: params.themeUuid,
-    });
+    const response = _network.get(coursePaths.course, camelToSnake(params));
     let result: CourseItemType = {
       courseUuid: '',
       courseName: '',
@@ -50,12 +49,7 @@ export const courseAPI = () => {
   };
 
   const getAdditionalPlace = async (params: GetAdditionalPlaceParamsType) => {
-    const response = _network.get(coursePaths.getAdditionalPlace, {
-      place_uuids: params.placeUuids,
-      place_type: params.placeType,
-      subway_uuid: params.subwayUuid,
-      theme_uuid: params.themeUuid,
-    });
+    const response = _network.get(coursePaths.getAdditionalPlace, camelToSnake(params));
     let result: PlaceItemType = {
       sort: 0,
       uuid: '',
@@ -79,6 +73,10 @@ export const courseAPI = () => {
       result = { ...result, open: false, sort: 0 };
     });
     return result;
+  };
+
+  const createCourse = async (params: CreateCourseParamsType) => {
+    const response = _network.post(coursePaths.createCourse, camelToSnake(params));
   };
 
   return { getCourse, getAdditionalPlace };

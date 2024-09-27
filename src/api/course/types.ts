@@ -22,6 +22,11 @@ export type CourseItemType = {
   places: Array<PlaceItemType>;
 };
 
+export type CreateCourseParamsType = CourseItemType & {
+  subwayUuid: string;
+  themeUuid: string;
+};
+
 export enum PlaceType {
   RESTAURANT = '음식점',
   CAFE = '카페',

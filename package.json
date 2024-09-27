@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@svgr/plugin-svgo": "^8.1.0",
+    "@types/navermaps": "^3.7.8",
     "axios": "^1.6.7",
     "query-string": "^8.2.0",
     "react": "^18.2.0",
