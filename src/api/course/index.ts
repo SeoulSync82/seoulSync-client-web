@@ -3,7 +3,7 @@ import AxiosHelper from '@/utils/network/axiosHelper';
 import type {
   GetAdditionalPlaceParamsType,
   CourseItemType,
-  GetCourseParamsType,
+  GetRecommendCourseParamsType,
   PlaceItemType,
 } from '@/api/course/types';
 import type { baseAPIType } from '@/api/types';
@@ -23,7 +23,9 @@ export const courseAPI = () => {
     .setBaseUrl(BASE_URL)
     .build();
 
-  const getCourse = async (params: GetCourseParamsType): Promise<CourseItemType> => {
+  const getRecommendCourse = async (
+    params: GetRecommendCourseParamsType,
+  ): Promise<CourseItemType> => {
     const response = _network.get(coursePaths.course, camelToSnake(params));
     let result: CourseItemType = {
       courseUuid: '',
@@ -88,5 +90,5 @@ export const courseAPI = () => {
     return result;
   };
 
-  return { getCourse, getAdditionalPlace, createCourse };
+  return { getRecommendCourse, getAdditionalPlace, createCourse };
 };

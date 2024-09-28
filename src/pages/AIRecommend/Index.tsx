@@ -117,7 +117,7 @@ const AIRecommend = () => {
             }),
           );
         } else {
-          const courseResult = await course.getCourse({
+          const courseResult = await course.getRecommendCourse({
             subwayUuid: selectedSubwayItem.uuid,
             themeUuid: selectedThemeItem.uuid,
           });

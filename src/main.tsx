@@ -43,13 +43,11 @@ const store = createStore(
 const queryClient = new QueryClient();
 
 root.render(
-  <React.StrictMode>
-    <CookiesProvider>
-      <QueryClientProvider client={queryClient}>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </QueryClientProvider>
-    </CookiesProvider>
-  </React.StrictMode>,
+  <CookiesProvider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </QueryClientProvider>
+  </CookiesProvider>,
 );

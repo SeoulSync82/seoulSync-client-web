@@ -1,7 +1,7 @@
 import type { subwayItemType, subwayLineItemType } from '@/api/subway/types';
 import type { themeItem } from '@/api/theme/types';
 
-export type GetCourseParamsType = {
+export type GetRecommendCourseParamsType = {
   subwayUuid: string;
   themeUuid: string;
 };
