@@ -3,6 +3,7 @@ import queryString from 'query-string';
 import { useNavigate } from 'react-router';
 
 const AxiosHelper = () => {
+  const navigate = useNavigate();
   let _baseUrl = '';
   let _authorization = '';
   let _instance: Axios;
@@ -35,10 +36,10 @@ const AxiosHelper = () => {
   const refreshToken = async () => {
     try {
       const { data } = await _instance.post(_baseUrl + '/user/refresh');
-
       return data;
     } catch (e) {
-      throw 'refreshError';
+      localStorage.removeItem('access_token');
+      navigate('/login', { replace: true });
     }
   };
 
@@ -50,9 +51,8 @@ const AxiosHelper = () => {
         _instance.defaults.headers.common['Authorization'] = `Bearer ${data.access_token}`;
         return get(error.response.config.url ? error.response.config.url : '', params);
       } else {
-        const navigate = useNavigate();
         localStorage.removeItem('access_token');
-        navigate('/login');
+        navigate('/login', { replace: true });
         return;
       }
     } else {

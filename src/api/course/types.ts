@@ -17,6 +17,9 @@ export type CourseItemType = {
   courseUuid: string;
   courseName: string;
   subway: subwayItemType;
+  isPosted?: boolean;
+  isBookmarked?: boolean;
+  createdAt?: Date | string;
   line?: Array<subwayLineItemType>;
   theme: themeItem;
   places: Array<PlaceItemType>;

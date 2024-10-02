@@ -11,7 +11,8 @@ import { AxiosResponse } from 'axios';
 import { camelToSnake, snakeToCamel } from '@/utils/commons/notation';
 
 const coursePaths = {
-  course: '/course/recommend',
+  course: (uuid: string) => `/course/${uuid}`,
+  getRecommendCourse: '/course/recommend',
   getAdditionalPlace: '/course/place/customize',
   createCourse: '/course/recommend/save',
 };
@@ -23,10 +24,39 @@ export const courseAPI = () => {
     .setBaseUrl(BASE_URL)
     .build();
 
+  const getCourse = async (uuid: string) => {
+    const response = _network.get(coursePaths.course(uuid));
+    let result: CourseItemType = {
+      courseUuid: '',
+      courseName: '',
+      subway: { uuid: '', station: '' },
+      isPosted: false,
+      isBookmarked: false,
+      createdAt: new Date(),
+      line: [],
+      theme: { id: 0, themeName: '', uuid: '' },
+      places: [],
+    };
+    await response.then((res: AxiosResponse<any, any>) => {
+      const apiResponse: baseAPIType<CourseItemType> = {
+        status: res.statusText,
+        items: res.data,
+      };
+      result = snakeToCamel(apiResponse.items);
+      if (result.createdAt) {
+        result.createdAt = new Date(Date.parse(result.createdAt as string));
+      }
+      result.places = result.places.map((item) => {
+        return { ...item, open: false };
+      });
+    });
+    return result;
+  };
+
   const getRecommendCourse = async (
     params: GetRecommendCourseParamsType,
   ): Promise<CourseItemType> => {
-    const response = _network.get(coursePaths.course, camelToSnake(params));
+    const response = _network.get(coursePaths.getRecommendCourse, camelToSnake(params));
     let result: CourseItemType = {
       courseUuid: '',
       courseName: '',
@@ -90,5 +120,5 @@ export const courseAPI = () => {
     return result;
   };
 
-  return { getRecommendCourse, getAdditionalPlace, createCourse };
+  return { getRecommendCourse, getAdditionalPlace, createCourse, getCourse };
 };
