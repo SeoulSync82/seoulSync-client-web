@@ -1,9 +1,7 @@
 import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
 import queryString from 'query-string';
-import { useNavigate } from 'react-router';
 
 const AxiosHelper = () => {
-  const navigate = useNavigate();
   let _baseUrl = '';
   let _authorization = '';
   let _instance: Axios;
@@ -34,13 +32,8 @@ const AxiosHelper = () => {
   };
 
   const refreshToken = async () => {
-    try {
-      const { data } = await _instance.post(_baseUrl + '/user/refresh');
-      return data;
-    } catch (e) {
-      localStorage.removeItem('access_token');
-      navigate('/login', { replace: true });
-    }
+    const { data } = await _instance.post(_baseUrl + '/user/refresh');
+    return data;
   };
 
   const axiosError = async (error: AxiosError, params?: unknown) => {
@@ -49,11 +42,9 @@ const AxiosHelper = () => {
       if (data.ok) {
         localStorage.setItem('access_token', data.access_token);
         _instance.defaults.headers.common['Authorization'] = `Bearer ${data.access_token}`;
-        return get(error.response.config.url ? error.response.config.url : '', params);
+        return await get(error.response.config.url ? error.response.config.url : '', params);
       } else {
-        localStorage.removeItem('access_token');
-        navigate('/login', { replace: true });
-        return;
+        throw error;
       }
     } else {
       throw error;
@@ -71,7 +62,11 @@ const AxiosHelper = () => {
 
       return data;
     } catch (e) {
-      throw axiosError(e as AxiosError, params);
+      if (e instanceof AxiosError) {
+        return await axiosError(e, params);
+      } else {
+        throw e;
+      }
     }
   };
 
@@ -81,7 +76,11 @@ const AxiosHelper = () => {
 
       return data;
     } catch (e) {
-      throw axiosError(e as AxiosError, params);
+      if (e instanceof AxiosError) {
+        return await axiosError(e, params);
+      } else {
+        throw e;
+      }
     }
   };
 
@@ -91,7 +90,11 @@ const AxiosHelper = () => {
 
       return data;
     } catch (e) {
-      throw axiosError(e as AxiosError, params);
+      if (e instanceof AxiosError) {
+        return await axiosError(e, params);
+      } else {
+        throw e;
+      }
     }
   };
 
@@ -106,7 +109,11 @@ const AxiosHelper = () => {
 
       return data;
     } catch (e) {
-      throw axiosError(e as AxiosError, params);
+      if (e instanceof AxiosError) {
+        return await axiosError(e, params);
+      } else {
+        throw e;
+      }
     }
   };
 
@@ -116,7 +123,11 @@ const AxiosHelper = () => {
 
       return data;
     } catch (e) {
-      throw axiosError(e as AxiosError, params);
+      if (e instanceof AxiosError) {
+        return await axiosError(e, params);
+      } else {
+        throw e;
+      }
     }
   };
 

@@ -40,7 +40,7 @@ export const courseAPI = () => {
     await response.then((res: AxiosResponse<any, any>) => {
       const apiResponse: baseAPIType<CourseItemType> = {
         status: res.statusText,
-        items: res.data,
+        items: res.data.items,
       };
       result = snakeToCamel(apiResponse.items);
       if (result.createdAt) {
